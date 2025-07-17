@@ -3,6 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --bg: #18191f;
+  --boxS: 2px 2px #00000080, 10px 1px 12px #00000080, 2px 2px 10px #00000080,
+    2px 2px 3px #00000080, inset 2px 2px 10px #00000080,
+    inset 2px 2px 10px #00000080, inset 2px 2px 10px #00000080,
+    inset 2px 2px 10px #00000080;
+  --textS: 0 0 50px #0072ff, 0 0 100px #0072ff, 0 0 150px #0072ff,
+    0 0 200px #0072ff;
 }
 
 @theme inline {
@@ -20,7 +27,223 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #000;
+  color: #fff;
+  font-family: "Geist", "Geist Mono", monospace, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.glass {
+  background: rgba(24, 24, 24, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.img-effect {
+  transition: transform 0.5s cubic-bezier(0.23, 1.02, 0.64, 0.98),
+    filter 0.5s cubic-bezier(0.23, 1.02, 0.64, 0.98);
+  filter: grayscale(0.2) contrast(1.1) drop-shadow(0 0 16px #00f6ff88);
+}
+.img-effect:hover {
+  transform: scale(1.08) rotate(-2deg);
+  filter: grayscale(0) contrast(1.2) drop-shadow(0 0 32px #00f6ffcc);
+}
+
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1.02, 0.64, 0.98),
+    transform 0.8s cubic-bezier(0.23, 1.02, 0.64, 0.98);
+}
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.glow-icon {
+  filter: drop-shadow(0 0 8px #00f) drop-shadow(0 0 16px #0ff);
+  transition: filter 0.3s;
+}
+
+.glow-icon:hover {
+  filter: drop-shadow(0 0 12px #f00) drop-shadow(0 0 24px #0f0);
+}
+
+nav {
+  border: 2px solid #222c;
+  border-radius: 1rem;
+  background: rgba(24, 24, 24, 0.92);
+  box-shadow: 0 2px 12px 0 #001a4033;
+}
+
+input,
+textarea {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid #00f;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #181818;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+/* Custom Glow Button */
+.glow-btn {
+  background: linear-gradient(90deg, #181818 60%, #333 100%);
+  color: #fff;
+  border: 2px solid #222;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.7rem;
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, color 0.2s;
+  z-index: 1;
+  box-shadow: 0 2px 12px 0 #001a4033;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.glow-btn:before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #00f 0%, #0ff 100%);
+  opacity: 0.7;
+  filter: blur(8px);
+  transition: left 0.4s cubic-bezier(0.23, 1.02, 0.64, 0.98);
+  z-index: -1;
+}
+.glow-btn:hover {
+  border-color: #00f;
+  box-shadow: 0 0 8px #00f, 0 0 12px #0ff;
+  color: #e0f7ff;
+}
+.glow-btn:hover:before {
+  left: 0;
+}
+.glow-btn svg {
+  transition: transform 0.3s cubic-bezier(0.23, 1.02, 0.64, 0.98), filter 0.3s;
+}
+.glow-btn:hover svg {
+  transform: scale(1.08) rotate(-4deg);
+  filter: drop-shadow(0 0 2px #00f6ff88);
+}
+
+/* Glowing Icons Animation */
+.glow-icon-animated {
+  margin: 0 15px;
+  padding: 15px 20px;
+  font-size: 2.5em;
+  border-radius: 20px;
+  color: #fff;
+  background-color: var(--bg);
+  box-shadow: var(--boxS);
+  text-shadow: var(--textS);
+  -webkit-animation: animate 3s linear infinite;
+  animation: animate 3s linear infinite;
+  transition: transform 0.3s ease;
+}
+
+.glow-icon-animated:hover {
+  transform: scale(1.1);
+}
+
+.glow-icon-animated.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.glow-icon-animated.delay-2 {
+  animation-delay: 0.3s;
+}
+
+.glow-icon-animated.delay-3 {
+  animation-delay: 0.5s;
+}
+
+.glow-icon-animated.delay-4 {
+  animation-delay: 0.7s;
+}
+
+.glow-icon-animated.delay-5 {
+  animation-delay: 0.9s;
+}
+
+@keyframes animate {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Glowing Image Icons */
+.glow-image-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  background-color: var(--bg);
+  box-shadow: var(--boxS);
+  -webkit-animation: animate 3s linear infinite;
+  animation: animate 3s linear infinite;
+  transition: transform 0.3s ease;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.glow-image-icon:hover {
+  transform: scale(1.1);
+}
+
+.glow-image-icon.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.glow-image-icon.delay-2 {
+  animation-delay: 0.3s;
+}
+
+.glow-image-icon.delay-3 {
+  animation-delay: 0.5s;
+}
+
+.glow-image-icon.delay-4 {
+  animation-delay: 0.7s;
+}
+
+.glow-image-icon.delay-5 {
+  animation-delay: 0.9s;
+}
+
+/* Bootstrap Icon specific styling */
+.glow-image-icon i {
+  font-size: 2.5rem;
+  text-shadow: var(--textS);
 }

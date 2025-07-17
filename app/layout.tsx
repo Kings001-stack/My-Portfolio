@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +13,14 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const sections = [
+  { name: "Home", href: "/" },
+  { name: "Projects", href: "/projects" },
+  { name: "Skills", href: "/skills" },
+  { name: "About Me", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,10 +34,54 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <nav
+          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-8 py-3 flex items-center justify-between gap-8 z-[1000]"
+          style={{ minWidth: "420px", maxWidth: "700px", width: "90%" }}
+        >
+          <div className="flex gap-8">
+            {sections.map((section) => (
+              <Link
+                key={section.name}
+                href={section.href}
+                className="flex items-center group focus:outline-none whitespace-nowrap"
+              >
+                <span className="glow-icon text-lg font-bold group-hover:text-primary transition-colors duration-200">
+                  {section.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/contact"
+            className="glow-btn flex items-center gap-2 whitespace-nowrap"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.5 7.5V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v.75m9 0v.75m0-.75h1.125A2.25 2.25 0 0120.25 9v7.5A2.25 2.25 0 0118 18.75H6A2.25 2.25 0 013.75 16.5V9A2.25 2.25 0 015.875 7.5H7.5m9 0h-9"
+              />
+            </svg>
+            Hire Me
+          </Link>
+        </nav>
+        <div className="pb-32">{children}</div>
       </body>
     </html>
   );
