@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  ChangeEvent,
+  FormEvent,
+} from "react";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -22,22 +28,24 @@ function useScrollFade() {
 
 export default function Contact() {
   const contactRef = useScrollFade();
-  const [input, setInput] = useState(
-    /*<React.Dispatch<React.SetStateAction<{}>>>*/ {
-      name: "",
-      email: "",
-      message: "",
-    }
-  );
-  const handleChange = (e: any) => {
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(input);
   };
+
   return (
     <div
       ref={contactRef}
@@ -93,7 +101,7 @@ export default function Contact() {
           <input
             type="text"
             onChange={handleChange}
-            name={input.name}
+            name="name"
             value={input.name}
             placeholder="Your Name"
             className="p-2 rounded bg-black text-white border border-gray-700 focus:outline-none"
@@ -101,7 +109,7 @@ export default function Contact() {
           <input
             type="email"
             onChange={handleChange}
-            name={input.email}
+            name="email"
             value={input.email}
             placeholder="Your Email"
             className="p-2 rounded bg-black text-white border border-gray-700 focus:outline-none"
@@ -109,7 +117,8 @@ export default function Contact() {
           <textarea
             placeholder="Your Message"
             onChange={handleChange}
-            name={input.message}
+            name="message"
+            value={input.message}
             className="p-2 rounded bg-black text-white border border-gray-700 focus:outline-none"
             rows={4}
           ></textarea>
@@ -122,10 +131,10 @@ export default function Contact() {
         </form>
         <div className="mt-8 text-center text-gray-500 text-sm">
           <p>
-            I'm always open to new opportunities, collaborations, and creative
-            projects.
+            I&apos;m always open to new opportunities, collaborations, and
+            creative projects.
             <br />
-            Let's build something amazing together!
+            Let&apos;s build something amazing together!
           </p>
         </div>
       </div>

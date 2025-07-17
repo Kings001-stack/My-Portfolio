@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -29,13 +30,15 @@ export default function About() {
     >
       <div className="glass p-10 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col items-center">
         <h1 className="text-4xl font-extrabold mb-6 glow-icon">About Me</h1>
-        <img
+        <Image
           src="/my pic.jpg"
           alt="My Photo"
+          width={160}
+          height={160}
           className="w-40 h-40 rounded-full mb-6 border-4 border-white shadow-lg img-effect"
         />
         <p className="max-w-4xl text-center text-lg mb-4">
-          Hi, I'm{" "}
+          Hi, I&apos;m{" "}
           <span className="text-primary font-bold">Emmanuel King Ugwu</span>, a
           passionate Software Designer and Full Stack Developer. I specialize in
           building beautiful, functional digital experiences for web and mobile

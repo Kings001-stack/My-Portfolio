@@ -1,19 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import Skills from "./skills/page";
-import About from "./about/page";
-import Contact from "./contact/page";
-import Projects from "./projects/page";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-
-const sections = [
-  { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
-  { name: "Skills", href: "/skills" },
-  { name: "About Me", href: "/about" },
-  { name: "Contact", href: "/contact" },
-];
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);

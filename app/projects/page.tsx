@@ -1,7 +1,7 @@
 "use client";
-"use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 
 const projects = [
   {
@@ -28,7 +28,7 @@ const projects = [
 ];
 
 function useScrollFade() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
@@ -60,9 +60,11 @@ export default function Projects() {
               key={project.title}
               className="flex flex-col items-center p-6 rounded-xl glass shadow-lg hover:scale-105 transition-transform"
             >
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
+                width={400}
+                height={192}
                 className="w-full h-48 object-cover rounded-lg mb-4 img-effect"
               />
               <h2 className="text-2xl font-bold mb-2 glow-icon">
@@ -82,10 +84,12 @@ export default function Projects() {
             </div>
           ))}
         </div>
-        
+
         {/* Project Technologies Section */}
         <div className="mt-16 flex flex-col items-center">
-          <h3 className="text-xl font-semibold mb-6 text-gray-300">Technologies Used in Projects</h3>
+          <h3 className="text-xl font-semibold mb-6 text-gray-300">
+            Technologies Used in Projects
+          </h3>
           <div className="flex gap-7 flex-wrap justify-center">
             <div className="glow-icon-animated delay-1">
               <i className="bi bi-filetype-jsx"></i>
