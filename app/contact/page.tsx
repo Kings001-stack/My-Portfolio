@@ -43,31 +43,35 @@ export default function Contact() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // You can handle form submission here
     console.log(input);
   };
 
   return (
     <div
       ref={contactRef}
-      className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-8 scroll-fade"
+      className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 scroll-fade"
     >
-      <div className="glass p-10 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col items-center">
-        <h1 className="text-4xl font-extrabold mb-6 glow-icon">Contact Me</h1>
-        <div className="flex flex-col items-center mb-8">
-          <p className="mb-2">
+      <div className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl w-full max-w-4xl flex flex-col items-center">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6 glow-icon text-center">
+          Contact Me
+        </h1>
+        <div className="flex flex-col items-center mb-6 sm:mb-8 text-center">
+          <p className="mb-2 text-sm sm:text-base">
             Phone: <span className="font-semibold">+(234) 9071906688</span>
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-sm sm:text-base">
             Email:{" "}
             <a
-              className="font-semibold"
-              href="e93521365@gmail.com"
+              className="font-semibold hover:text-primary transition-colors"
+              href="mailto:e93521365@gmail.com"
               target="_blank"
+              rel="noopener noreferrer"
             >
               e93521365@gmail.com
             </a>
           </p>
-          <div className="flex gap-4 mt-2">
+          <div className="flex gap-3 mt-2">
             <a
               href="https://wa.link/vpsub2"
               target="_blank"
@@ -96,7 +100,7 @@ export default function Contact() {
         </div>
         <form
           onSubmit={onSubmit}
-          className="w-full max-w-lg bg-[#181818cc] p-6 rounded-lg shadow-lg flex flex-col gap-4 glass"
+          className="w-full max-w-lg bg-[#181818cc] p-4 sm:p-6 rounded-lg shadow-lg flex flex-col gap-3 glass"
         >
           <input
             type="text"
@@ -104,7 +108,7 @@ export default function Contact() {
             name="name"
             value={input.name}
             placeholder="Your Name"
-            className="p-2 rounded bg-black text-white border border-gray-700 focus:outline-none"
+            className="p-2 sm:p-3 rounded bg-black text-white border border-gray-700 focus:outline-none focus:border-primary transition-colors"
           />
           <input
             type="email"
@@ -112,30 +116,28 @@ export default function Contact() {
             name="email"
             value={input.email}
             placeholder="Your Email"
-            className="p-2 rounded bg-black text-white border border-gray-700 focus:outline-none"
+            className="p-2 sm:p-3 rounded bg-black text-white border border-gray-700 focus:outline-none focus:border-primary transition-colors"
           />
           <textarea
             placeholder="Your Message"
             onChange={handleChange}
             name="message"
             value={input.message}
-            className="p-2 rounded bg-black text-white border border-gray-700 focus:outline-none"
+            className="p-2 sm:p-3 rounded bg-black text-white border border-gray-700 focus:outline-none focus:border-primary transition-colors resize-none"
             rows={4}
           ></textarea>
           <button
             type="submit"
-            className="glow-btn flex justify-center items-center"
+            className="glow-btn flex justify-center items-center mt-2"
           >
             Send Message
           </button>
         </form>
-        <div className="mt-8 text-center text-gray-500 text-sm">
-          <p>
-            I&apos;m always open to new opportunities, collaborations, and
-            creative projects.
-            <br />
-            Let&apos;s build something amazing together!
-          </p>
+        <div className="mt-6 sm:mt-8 text-center text-gray-50 text-xs sm:text-sm px-4">
+          I&apos;m always open to new opportunities, collaborations, and
+          creative projects.
+          <br />
+          Let&apos;s build something amazing together!
         </div>
       </div>
     </div>

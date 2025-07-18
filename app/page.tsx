@@ -24,26 +24,26 @@ function useScrollFade() {
 export default function Home() {
   const homeRef = useScrollFade();
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-0">
-      <div className="w-full flex flex-col items-center justify-center min-h-screen pt-8 pb-32">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8">
+      <div className="w-full flex flex-col items-center justify-center min-h-screen pt-4 sm:pt-6 lg:pt-8 pb-16 sm:pb-20 lg:pb-24">
         <div
           ref={homeRef}
-          className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-8 pb-24 scroll-fade glass"
+          className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 pb-16 sm:pb-20 lg:pb-24 scroll-fade glass w-full max-w-6xl"
         >
-          <div className="mb-8 flex flex-col items-center">
+          <div className="mb-6 sm:mb-8 flex flex-col items-center">
             <Image
               src={"/profile.png"}
               alt="My Logo"
               width={120}
               height={120}
-              className="glow-icon img-effect rounded-full"
+              className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 glow-icon img-effect rounded-full"
             />
-            <span className="mt-2 text-xl font-mono text-primary">
+            <span className="mt-2 text-lg sm:text-xl lg:text-2xl font-mono text-primary">
               @EmmanuelKing
             </span>
           </div>
-          <div className="bg-[#181818bb] rounded-lg p-8 shadow-lg max-w-4xl w-full glass">
-            <pre className="mt-3 text-lg font-mono text-white leading-relaxed select-none">
+          <div className="bg-[#181818bb] rounded-lg p-4 sm:p-6 lg:p-8 shadow-lg w-full max-w-4xl glass">
+            <pre className="mt-3 text-sm sm:text-base lg:text-lg font-mono text-white leading-relaxed select-none overflow-x-auto">
               {`function FocusMode() {
   disable('distractions');
 
@@ -63,10 +63,10 @@ export default function Home() {
 `}
             </pre>
           </div>
-          <h1 className="mt-8 text-4xl font-extrabold text-center glow-icon">
+          <h1 className="mt-6 sm:mt-8 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center glow-icon px-4">
             Software Designer & Full Stack Developer
           </h1>
-          <p className="mt-4 text-lg text-center max-w-lg">
+          <p className="mt-4 text-base sm:text-lg text-center max-w-lg px-4">
             Welcome! I build beautiful, performant digital experiences with code
             and creativity.
             <br />
@@ -78,10 +78,10 @@ export default function Home() {
                     "linear-gradient(90deg, #1e293b 80%, #2563eb 100%)",
                 }}
               >
-                <span className="text-3xl font-bold mb-3 flex items-center gap-2">
+                <span className="text-2xl sm:text-3xl font-bold mb-3 flex items-center gap-2">
                   {/* UI/UX Icon */}
                   <svg
-                    className="w-7 h-7 text-blue-200"
+                    className="w-6 h-6 sm:w-7 sm:h-7 text-blue-200"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -95,7 +95,7 @@ export default function Home() {
                   </svg>
                   UI/UX Design
                 </span>
-                <span className="text-base font-normal text-blue-100 text-center mt-2">
+                <span className="text-sm sm:text-base font-normal text-blue-100 text-center mt-2">
                   Intuitive, beautiful interfaces and seamless user journeys for
                   web and mobile.
                 </span>
@@ -107,10 +107,10 @@ export default function Home() {
                     "linear-gradient(90deg, #2a183b 80%, #a21caf 100%)",
                 }}
               >
-                <span className="text-3xl font-bold mb-3 flex items-center gap-2">
+                <span className="text-2xl sm:text-3xl font-bold mb-3 flex items-center gap-2">
                   {/* Web Icon */}
                   <svg
-                    className="w-7 h-7 text-purple-200"
+                    className="w-6 h-6 sm:w-7 sm:h-7 text-purple-200"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -125,7 +125,7 @@ export default function Home() {
                   </svg>
                   Web Development
                 </span>
-                <span className="text-base font-normal text-purple-100 text-center mt-2">
+                <span className="text-sm sm:text-base font-normal text-purple-100 text-center mt-2">
                   Modern, scalable websites and web apps built for performance
                   and impact.
                 </span>
@@ -137,10 +137,10 @@ export default function Home() {
                     "linear-gradient(90deg, #3b1e1e 80%, #dc2626 100%)",
                 }}
               >
-                <span className="text-3xl font-bold mb-3 flex items-center gap-2">
+                <span className="text-2xl sm:text-3xl font-bold mb-3 flex items-center gap-2">
                   {/* Mobile Icon */}
                   <svg
-                    className="w-7 h-7 text-red-200"
+                    className="w-6 h-6 sm:w-7 sm:h-7 text-red-200"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -151,36 +151,36 @@ export default function Home() {
                   </svg>
                   Mobile Development
                 </span>
-                <span className="text-base font-normal text-red-100 text-center mt-2">
+                <span className="text-sm sm:text-base font-normal text-red-100 text-center mt-2">
                   Cross-platform mobile apps with native feel and great design.
                 </span>
               </span>
             </span>
           </p>
-          <div className="mt-8 flex gap-6">
-            <Link href="/projects" className="glow-btn">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 px-4">
+            <Link href="/projects" className="glow-btn text-center">
               View Projects
             </Link>
-            <Link href="/skills" className="glow-btn">
+            <Link href="/skills" className="glow-btn text-center">
               Explore Skills
             </Link>
-            <Link href="/contact" className="glow-btn">
+            <Link href="/contact" className="glow-btn text-center">
               Contact Me
             </Link>
           </div>
-          <div className="mt-12 flex flex-col items-center">
-            <span className="text-sm text-gray-400">
+          <div className="mt-8 sm:mt-12 flex flex-col items-center px-4">
+            <span className="text-xs sm:text-sm text-gray-400">
               Am also a level 5 hacker{" "}
               <span className="animate-bounce">🤫</span>
             </span>
           </div>
 
           {/* Glowing Tech Icons Section */}
-          <div className="mt-16 flex flex-col items-center">
-            <h3 className="text-xl font-semibold mb-6 text-gray-300">
+          <div className="mt-12 sm:mt-16 flex flex-col items-center px-4">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-gray-300">
               Technologies I Work With
             </h3>
-            <div className="flex gap-6 flex-wrap justify-center">
+            <div className="flex gap-3 sm:gap-4 lg:gap-6 flex-wrap justify-center">
               <div className="glow-icon-animated delay-1">
                 <i className="bi bi-code-slash"></i>
               </div>

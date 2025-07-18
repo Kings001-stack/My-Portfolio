@@ -26,18 +26,20 @@ export default function About() {
   return (
     <div
       ref={aboutRef}
-      className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-8 scroll-fade"
+      className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 scroll-fade"
     >
-      <div className="glass p-10 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col items-center">
-        <h1 className="text-4xl font-extrabold mb-6 glow-icon">About Me</h1>
+      <div className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl w-full max-w-4xl flex flex-col items-center">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6 glow-icon text-center">
+          About Me
+        </h1>
         <Image
           src="/my pic.jpg"
           alt="My Photo"
           width={160}
           height={160}
-          className="w-40 h-40 rounded-full mb-6 border-4 border-white shadow-lg img-effect"
+          className="w-24 h-24 sm:w-32 sm:h-32 40:h-40 rounded-full mb-4 sm:mb-6 border-4 border-white shadow-lg img-effect"
         />
-        <p className="max-w-4xl text-center text-lg mb-4">
+        <p className="w-full text-center text-sm sm:text-base lg:text-lg mb-4 px-4 sm:px-6 lg:px-8">
           Hi, I&apos;m{" "}
           <span className="text-primary font-bold">Emmanuel King Ugwu</span>, a
           passionate Software Designer and Full Stack Developer. I specialize in
@@ -54,7 +56,7 @@ export default function About() {
           <span className="text-primary">Interests:</span> 3D web, animation,
           open source, and AI-driven interfaces.
         </p>
-        <div className="flex gap-4 mt-4">
+        <div className="flex gap-3 sm:gap-4 lg:gap-6 mt-4">
           <a
             href="https://github.com/Kings001-stack"
             target="_blank"
@@ -74,11 +76,11 @@ export default function About() {
         </div>
 
         {/* About Icons Section */}
-        <div className="mt-12 flex flex-col items-center">
-          <h3 className="text-xl font-semibold mb-6 text-gray-300">
+        <div className="mt-8 sm:mt-12 flex flex-col items-center">
+          <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-gray-300 text-center">
             What I Do
           </h3>
-          <div className="flex gap-6 flex-wrap justify-center">
+          <div className="flex gap-3 sm:gap-4 lg:gap-6 flex-wrap justify-center">
             <div className="glow-icon-animated delay-1">
               <i className="bi bi-laptop"></i>
             </div>

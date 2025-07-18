@@ -122,6 +122,22 @@ textarea:focus {
   align-items: center;
   gap: 0.5rem;
 }
+
+/* Responsive button sizes */
+@media (max-width: 640px) {
+  .glow-btn {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glow-btn {
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
 .glow-btn:before {
   content: "";
   position: absolute;
@@ -164,6 +180,31 @@ textarea:focus {
   -webkit-animation: animate 3s linear infinite;
   animation: animate 3s linear infinite;
   transition: transform 0.3s ease;
+}
+
+/* Responsive icon sizes */
+@media (max-width: 768px) {
+  .glow-icon-animated {
+    margin: 0 10px;
+    padding: 12px 15px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .glow-icon-animated {
+    margin: 0 8px;
+    padding: 10px 12px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glow-icon-animated {
+    margin: 0 6px;
+    padding: 8px 10px;
+    font-size: 1.05rem;
+  }
 }
 
 .glow-icon-animated:hover {
@@ -218,6 +259,23 @@ textarea:focus {
   color: #fff;
 }
 
+/* Responsive image icon sizes */
+@media (max-width: 640px) {
+  .glow-image-icon {
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glow-image-icon {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+}
+
 .glow-image-icon:hover {
   transform: scale(1.1);
 }
@@ -246,4 +304,176 @@ textarea:focus {
 .glow-image-icon i {
   font-size: 2.5rem;
   text-shadow: var(--textS);
+}
+
+@media (max-width: 640px) {
+  .glow-image-icon i {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glow-image-icon i {
+    font-size: 1.5rem;
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+
+  p {
+    font-size: 0.95rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  p {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.1rem !important;
+  }
+
+  h3 {
+    font-size: 1rem !important;
+  }
+
+  p {
+    font-size: 0.85rem !important;
+  }
+}
+
+/* Responsive Spacing */
+@media (max-width: 768px) {
+  .glass {
+    padding: 1.05em !important;
+    margin: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .glass {
+    padding: 1em !important;
+    margin: 0.5rem !important;
+  }
+}
+
+/* Responsive Grid Layouts */
+@media (max-width: 1240px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-cols-3,
+  .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Responsive Flex Layouts */
+@media (max-width: 768px) {
+  .flex-row {
+    flex-direction: column !important;
+  }
+
+  .gap-8 {
+    gap: 1rem !important;
+  }
+
+  .gap-6 {
+    gap: 0.75rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .gap-8 {
+    gap: 0.75rem !important;
+  }
+
+  .gap-6 {
+    gap: 0.5rem !important;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .min-h-screen {
+    min-height: 100vh;
+    padding: 0.5rem !important;
+  }
+
+  .p-8 {
+    padding: 1rem !important;
+  }
+
+  .p-10 {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .glow-btn:hover {
+    transform: none;
+  }
+
+  .glow-icon-animated:hover {
+    transform: none;
+  }
+
+  .img-effect:hover {
+    transform: none;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .min-h-screen {
+    min-height: auto;
+    padding: 1em 0;
+  }
+
+  .pb-32 {
+    padding-bottom: 2rem !important;
+  }
+
+  .pb-20 {
+    padding-bottom: 1.5rem !important;
+  }
 }
