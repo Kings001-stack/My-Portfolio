@@ -58,6 +58,89 @@ const skills = [
     icon: "bi bi-palette",
     desc: "Design application/software for the best experience of a user",
   },
+  // Security & Best Practices
+  {
+    name: "Web Security",
+    icon: "bi bi-shield-check",
+    desc: "OWASP Top 10, JWT authentication, secure coding practices.",
+  },
+  {
+    name: "Secure Dev Practices",
+    icon: "bi bi-shield-lock",
+    desc: "Static code analysis, encryption basics, security testing.",
+  },
+  {
+    name: "Auth & Identity",
+    icon: "bi bi-person-check",
+    desc: "OAuth2, OpenID Connect, SSO integrations, identity management.",
+  },
+  // Data & AI
+  {
+    name: "PostgreSQL",
+    icon: "bi bi-database",
+    desc: "Advanced relational database management and optimization.",
+  },
+  {
+    name: "Redis",
+    icon: "bi bi-lightning-charge",
+    desc: "In-memory data structure store, caching, and session management.",
+  },
+  {
+    name: "Data Engineering",
+    icon: "bi bi-gear-wide-connected",
+    desc: "ETL pipelines, Apache Kafka, data processing workflows.",
+  },
+  {
+    name: "Machine Learning",
+    icon: "bi bi-cpu",
+    desc: "TensorFlow, PyTorch, model development and deployment.",
+  },
+  {
+    name: "LLM Integration",
+    icon: "bi bi-robot",
+    desc: "OpenAI API, large language model integration and fine-tuning.",
+  },
+  {
+    name: "Vector Databases",
+    icon: "bi bi-diagram-3",
+    desc: "Pinecone, Weaviate, FAISS for AI-powered search and retrieval.",
+  },
+  // Cloud & DevOps
+  {
+    name: "AWS",
+    icon: "bi bi-cloud",
+    desc: "Cloud infrastructure, services, and scalable deployments.",
+  },
+  {
+    name: "Azure",
+    icon: "bi bi-cloud-arrow-up",
+    desc: "Microsoft cloud platform and enterprise solutions.",
+  },
+  {
+    name: "Google Cloud",
+    icon: "bi bi-cloud-check",
+    desc: "GCP services, AI/ML tools, and cloud-native development.",
+  },
+  {
+    name: "CI/CD Pipelines",
+    icon: "bi bi-arrow-repeat",
+    desc: "GitHub Actions, GitLab CI, Jenkins automation workflows.",
+  },
+  {
+    name: "Docker",
+    icon: "bi bi-box",
+    desc: "Containerization, microservices, and deployment consistency.",
+  },
+  {
+    name: "Kubernetes",
+    icon: "bi bi-diagram-2",
+    desc: "Container orchestration, scaling, and cluster management.",
+  },
+  {
+    name: "Infrastructure as Code",
+    icon: "bi bi-code-square",
+    desc: "Terraform, Pulumi, automated infrastructure provisioning.",
+  },
 ];
 
 function useScrollFade() {

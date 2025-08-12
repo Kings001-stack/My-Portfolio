@@ -6,17 +6,17 @@ import Image from "next/image";
 const projects = [
   {
     title: "Portfolio Website",
-    image: "/portfolio-preview.jpg",
+    image: "/port.png",
     description:
       "A modern, interactive portfolio built with Next.js, React, and Tailwind CSS, featuring glassmorphism and scroll effects.",
-    link: "https://yourportfolio.com",
+    link: "https://adeshina-pf.netlify.app/",
   },
   {
     title: "E-Commerce Platform",
-    image: "/ecommerce-preview.jpg",
+    image: "/ecom.png",
     description:
       "A full-featured e-commerce web app with product search, cart, and secure checkout, using React, Node.js, and MongoDB.",
-    link: "https://yourecommerce.com",
+    link: "https://www.figma.com/design/klemxcEJQOJXDOynSqZAi5/UI-kit---Ecommerce-Mobile-App--Community-?node-id=244-2&p=f&t=8pHwmsja0sLYZpqN-0",
   },
   {
     title: "Blog CMS",
@@ -25,6 +25,47 @@ const projects = [
       "A content management system for blogs, supporting markdown, user roles, and analytics, built with Next.js and MySQL.",
     link: "https://yourblogcms.com",
   },
+  {
+    title: "Ignite Framework",
+    image: "/ignite.png",
+    description: "A React-native framework for easier app development",
+    link: "https://ignitedocs.vercel.app/",
+  },
+  {
+    title: "AI Chat Bot",
+    image: "/AI.png",
+    description:
+      "A conversational AI chat bot with context memory, tool usage, and streaming responses, built with Next.js, OpenAI, and WebSockets.",
+    link: "https://best-gold.vercel.app/",
+  },
+  {
+    title: "Handyman Mobile App",
+    image: "/HM.png",
+    description:
+      "A React Native app connecting homeowners with vetted handymen, featuring real-time chat, booking, and payments.",
+    link: "https://your-handyman-app.com",
+  },
+  {
+    title: "School Management System",
+    image: "/sms.png",
+    description:
+      "End-to-end web platform for schools: admissions, attendance, grading, timetables, and analytics using Next.js and PostgreSQL.",
+    link: "https://pageland-three.vercel.app/",
+  },
+  {
+    title: "Real estate website",
+    image: "/RTB.png",
+    description:
+      "A real estate website built with HTML, TailwindCSS, and JavaScript.",
+    link: "https://realtimebricks.com/",
+  },
+  {
+    title: "Pastry Shop Website",
+    image: "/pastry.png",
+    description:
+      "A pastry shop website built with HTML, TailwindCSS, and JavaScript.",
+    link: "https://pastry-smoky.vercel.app/",
+  }
 ];
 
 function useScrollFade() {

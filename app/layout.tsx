@@ -22,9 +22,64 @@ const sections = [
 ];
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.example"
+  ),
   title: "Emmanuel King Ugwu - Software Designer & Full Stack Developer",
   description:
     "Portfolio of Emmanuel King Ugwu, a passionate Software Designer and Full Stack Developer specializing in React, Next.js, and modern web technologies.",
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "Emmanuel King Ugwu",
+    "Full Stack Developer",
+    "Software Designer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Portfolio",
+    "UI/UX",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  openGraph: {
+    title: "Emmanuel King Ugwu - Software Designer & Full Stack Developer",
+    description:
+      "Portfolio of Emmanuel King Ugwu, a passionate Software Designer and Full Stack Developer specializing in React, Next.js, and modern web technologies.",
+    url: "/",
+    siteName: "Emmanuel King Ugwu",
+    images: [
+      {
+        url: "/profile.png",
+        width: 1200,
+        height: 630,
+        alt: "Emmanuel King Ugwu Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Emmanuel King Ugwu - Software Designer & Full Stack Developer",
+    description:
+      "Portfolio of Emmanuel King Ugwu, a passionate Software Designer and Full Stack Developer specializing in React, Next.js, and modern web technologies.",
+    images: ["/profile.png"],
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +87,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.example";
   return (
     <html lang="en">
       <head>
@@ -102,6 +159,23 @@ export default function RootLayout({
         </nav>
 
         <div className="pb-20 lg:pb-32">{children}</div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Emmanuel King Ugwu",
+              url: baseUrl,
+              sameAs: [
+                "https://github.com/Kings001-stack",
+                "https://www.linkedin.com/in/emmanuel-king-ugwu/",
+              ],
+              jobTitle: "Full Stack Developer",
+              knowsAbout: ["React", "Next.js", "TypeScript", "UI/UX"],
+            }),
+          }}
+        />
       </body>
     </html>
   );

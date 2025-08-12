@@ -7,6 +7,7 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from "react";
+import emailjs from "@emailjs/browser";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -28,6 +29,7 @@ function useScrollFade() {
 
 export default function Contact() {
   const contactRef = useScrollFade();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -43,8 +45,23 @@ export default function Contact() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // You can handle form submission here
-    console.log(input);
+    emailjs
+      .sendForm(
+        "service_yjgt9jm",
+        "template_bve5h3c",
+        formRef.current as HTMLFormElement,
+        {
+          publicKey: "Im2NveJS2CF3g-Rtt",
+        }
+      )
+      .then(
+        () => {
+          console.log("SUCCESS!");
+        },
+        (error) => {
+          console.log("FAILED...", (error as any).text);
+        }
+      );
   };
 
   return (
@@ -99,6 +116,7 @@ export default function Contact() {
           </div>
         </div>
         <form
+          ref={formRef}
           onSubmit={onSubmit}
           className="w-full max-w-lg bg-[#181818cc] p-4 sm:p-6 rounded-lg shadow-lg flex flex-col gap-3 glass"
         >

@@ -1,5 +1,52 @@
 @import "tailwindcss";
 
+/* Pill-shaped profile image styles */
+.profile-pill {
+  border-radius: 9999px 9999px 9999px 9999px;
+  overflow: hidden;
+}
+
+/* TypeWriter cursor animation */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: currentColor;
+  margin-left: 2px;
+  animation: cursor-blink 1s infinite;
+}
+
+/* Code syntax highlighting classes */
+.code-keyword {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.code-function {
+  color: #f59e0b;
+}
+
+.code-string {
+  color: #10b981;
+}
+
+.code-number {
+  color: #ec4899;
+}
+
+.code-comment {
+  color: #6b7280;
+}
+
+.code-operator {
+  color: #d946ef;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

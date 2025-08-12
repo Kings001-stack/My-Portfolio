@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
+import Testimonials from "../components/Testimonials";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -23,6 +24,43 @@ function useScrollFade() {
 
 export default function About() {
   const aboutRef = useScrollFade();
+
+  // Sample testimonials data
+  const testimonials = [
+    {
+      id: 1,
+      name: "Mr. Charles onah",
+      role: "CEO",
+      company: "Realtime bricks LTD.",
+      image: "/charle.jpg", // Using existing image as placeholder
+      text: "Emmanuel delivered an exceptional website that perfectly captured our brand's essence. His attention to detail and technical expertise made the entire process smooth and enjoyable.",
+    },
+    {
+      id: 2,
+      name: "Dr.Ifeoma Umeh",
+      role: "Product Manager",
+      company: "Immaculate heart Intl.",
+      image: "/ifeoma.png", // Using existing image as placeholder
+      text: "Working with Emmanuel was a game-changer for our startup. He not only built a beautiful platform but also provided valuable insights that improved our user experience significantly.",
+    },
+    {
+      id: 3,
+      name: "Mr Lukman",
+      role: "HR",
+      company: "Lincoln college of science, management and technology",
+      image: "/profile.png", // Using existing image as placeholder
+      text: "Emmanuel's work exceeded our expectations. His ability to translate our vision into a functional, elegant website while maintaining excellent communication throughout the project was impressive.",
+    },
+    {
+      id: 4,
+      name: "Mrs Augusta Ugwu",
+      role: "Forensics officer",
+      company: "EFCC",
+      image: "/augusta.png", // Using existing image as placeholder
+      text: "Emmanuel King is a very hardworking and dedicated person. He is a very good developer and he is always willing to help others. He is a very good team player and he is always willing to learn new things. He is a very good problem solver and he is always willing to help others. He is a very good communicator and he is always willing to help others. He is a very good leader and he is always willing to help others. He is a very good problem solver and he is always willing to help others. He is a very good communicator and he is always willing to help others. He is a very good leader and he is always willing to help others. He is a very good problem solver and he is always willing to help others. He is a very good communicator and he is always willing to help others. He is a very good leader and he is always willing to help others.",
+    },
+  ];
+
   return (
     <div
       ref={aboutRef}
@@ -33,13 +71,14 @@ export default function About() {
           About Me
         </h1>
         <Image
-          src="/my pic.jpg"
+          src="/mypic.jpg"
           alt="My Photo"
-          width={160}
-          height={160}
-          className="w-24 h-24 sm:w-32 sm:h-32 40:h-40 rounded-full mb-4 sm:mb-6 border-4 border-white shadow-lg img-effect"
+          width={240}
+          height={240}
+          priority
+          className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-[40px] mb-6 sm:mb-8 border-4 border-white shadow-lg img-effect"
         />
-        <p className="w-full text-center text-sm sm:text-base lg:text-lg mb-4 px-4 sm:px-6 lg:px-8">
+        <p className="w-full text-center text-sm sm:text-base lg:text-lg mb-6 px-4 sm:px-6 lg:px-8">
           Hi, I&apos;m{" "}
           <span className="text-primary font-bold">Emmanuel King Ugwu</span>, a
           passionate Software Designer and Full Stack Developer. I specialize in
@@ -97,6 +136,11 @@ export default function About() {
               <i className="bi bi-lightbulb"></i>
             </div>
           </div>
+        </div>
+
+        {/* Testimonials Section */}
+        <div className="mt-12 sm:mt-16 w-full">
+          <Testimonials testimonials={testimonials} />
         </div>
       </div>
     </div>

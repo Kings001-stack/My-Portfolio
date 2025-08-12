@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
+import EnhancedCodeEditor from "./components/EnhancedCodeEditor";
+import TypedText from "./components/TypedText";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -23,48 +25,74 @@ function useScrollFade() {
 
 export default function Home() {
   const homeRef = useScrollFade();
+
+  // Sample code for the code editor
+  const sampleCode = `const hardWork = 100;
+const focus = 0.8;
+
+const success = hardWork * focus;
+
+console.log(\`Success = \${success} (Work hard, stay focused)\`);`;
+
+  const typewriterTexts = useMemo(
+    () => [
+      "Full Stack Developer",
+      "Software Designer",
+      "UI/UX Enthusiast",
+      "Footballer",
+    ],
+    []
+  );
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8">
-      <div className="w-full flex flex-col items-center justify-center min-h-screen pt-4 sm:pt-6 lg:pt-8 pb-16 sm:pb-20 lg:pb-24">
+      <div className="w-full flex flex-col items-center justify-center min-h-screen pt-4 sm:pt-6 lg:p-8 pb-16 sm:pb-20 lg:pb-24">
         <div
           ref={homeRef}
           className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 pb-16 sm:pb-20 lg:pb-24 scroll-fade glass w-full max-w-6xl"
         >
-          <div className="mb-6 sm:mb-8 flex flex-col items-center">
-            <Image
-              src={"/profile.png"}
-              alt="My Logo"
-              width={120}
-              height={120}
-              className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 glow-icon img-effect rounded-full"
+          {/* Hero Section with Two Columns */}
+          <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+            {/* Left Column - Profile */}
+            <div className="flex flex-col items-center text-center w-full lg:w-1/2">
+              <div className="mb-6 sm:mb-8 flex flex-col items-center">
+                <Image
+                  src={"/dp 2.jpg"}
+                  alt="My Logo"
+                  width={180}
+                  height={180}
+                  priority
+                  className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 glow-icon img-effect rounded-[40px]" // Pill shape
+                />
+                <span className="mt-4 text-xl sm:text-2xl lg:text-3xl font-mono text-primary">
+                  @EmmanuelKing
+                </span>
+              </div>
+            </div>
+
+            {/* Right Column - Code Editor */}
+            <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
+              <EnhancedCodeEditor
+                code={sampleCode}
+                language="JavaScript"
+                fileName="function.js"
+                theme="dark"
+                highlightSyntax={true}
+              />
+            </div>
+          </div>
+          {/* Centered Typewriter below both columns */}
+          <h1 className="w-full text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-6 sm:mt-8 glow-icon">
+            A{" "}
+            <TypedText
+              strings={typewriterTexts}
+              typeSpeed={50}
+              backSpeed={60}
+              backDelay={1500}
+              loop
+              className="text-primary"
+              cursorChar="|"
             />
-            <span className="mt-2 text-lg sm:text-xl lg:text-2xl font-mono text-primary">
-              @EmmanuelKing
-            </span>
-          </div>
-          <div className="bg-[#181818bb] rounded-lg p-4 sm:p-6 lg:p-8 shadow-lg w-full max-w-4xl glass">
-            <pre className="mt-3 text-sm sm:text-base lg:text-lg font-mono text-white leading-relaxed select-none overflow-x-auto">
-              {`function FocusMode() {
-  disable('distractions');
-
-  while (energy.level > 80) {
-
-    if (productivity.rate < optimal) {
-      productivity.boost('💡');
-    }
-    create(awesomeProjects);
-    debug(life);
-    
-  }
-  deploy(portfolio);
-}
-
-// Powered by Next.js, React ⚛️, and dangerously high caffeine levels ☕️
-`}
-            </pre>
-          </div>
-          <h1 className="mt-6 sm:mt-8 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center glow-icon px-4">
-            Software Designer & Full Stack Developer
           </h1>
           <p className="mt-4 text-base sm:text-lg text-center max-w-lg px-4">
             Welcome! I build beautiful, performant digital experiences with code
@@ -167,12 +195,6 @@ export default function Home() {
             <Link href="/contact" className="glow-btn text-center">
               Contact Me
             </Link>
-          </div>
-          <div className="mt-8 sm:mt-12 flex flex-col items-center px-4">
-            <span className="text-xs sm:text-sm text-gray-400">
-              Am also a level 5 hacker{" "}
-              <span className="animate-bounce">🤫</span>
-            </span>
           </div>
 
           {/* Glowing Tech Icons Section */}
