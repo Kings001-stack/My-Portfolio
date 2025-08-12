@@ -37,7 +37,7 @@ export default function About() {
     },
     {
       id: 2,
-      name: "Dr.Ifeoma Umeh",
+      name: "Dr. Ifeoma Umeh",
       role: "Product Manager",
       company: "Immaculate heart Intl.",
       image: "/ifeoma.png", // Using existing image as placeholder

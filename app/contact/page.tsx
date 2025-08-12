@@ -58,8 +58,17 @@ export default function Contact() {
         () => {
           console.log("SUCCESS!");
         },
-        (error) => {
-          console.log("FAILED...", (error as any).text);
+        (error: unknown) => {
+          if (
+            typeof error === "object" &&
+            error !== null &&
+            "text" in error &&
+            typeof (error as { text?: unknown }).text === "string"
+          ) {
+            console.log("FAILED...", (error as { text: string }).text);
+          } else {
+            console.log("FAILED...");
+          }
         }
       );
   };
