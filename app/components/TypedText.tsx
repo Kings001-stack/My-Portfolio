@@ -51,7 +51,7 @@ const TypedText: React.FC<TypedTextProps> = ({
     };
   }, [strings, typeSpeed, backSpeed, backDelay, loop, cursorChar]);
 
-  return <span ref={elementRef} className={className} />;
+  return <span ref={elementRef} className={className} suppressHydrationWarning />;
 };
 
 export default TypedText;

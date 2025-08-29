@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import ThemeToggle from "./components/ThemeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +19,7 @@ const sections = [
   { name: "Projects", href: "/projects", icon: "bi-folder" },
   { name: "Skills", href: "/skills", icon: "bi-code-slash" },
   { name: "About Me", href: "/about", icon: "bi-person" },
+  { name: "Resume", href: "/resume", icon: "bi-file-earmark-text" },
   { name: "Contact", href: "/contact", icon: "bi-envelope" },
 ];
 
@@ -97,6 +99,12 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Initial theme to avoid flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => { try { const s = localStorage.getItem('theme'); const t = s || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();`,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -116,6 +124,8 @@ export default function RootLayout({
               </Link>
             ))}
           </div>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
           <Link
             href="/contact"
             className="glow-btn flex items-center gap-2 whitespace-nowrap"
@@ -136,21 +146,22 @@ export default function RootLayout({
             </svg>
             Hire Me
           </Link>
+          </div>
         </nav>
 
         {/* Mobile Navigation */}
         <nav className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000] w-[95%] max-w-sm">
-          <div className="flex items-center justify-around bg-black/90 backdrop-blur-lg border border-gray-800 rounded-2xl px-4 py-3 shadow-2xl">
+          <div className="flex items-center justify-between bg-black/90 backdrop-blur-lg border border-gray-800 rounded-2xl px-4 py-3 shadow-2xl">
             {sections.map((section) => (
               <Link
                 key={section.name}
                 href={section.href}
-                className="flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 hover:bg-white/10 group"
+                className="flex flex-1 min-w-0 flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 hover:bg-white/10 group text-center"
               >
                 <i
                   className={`${section.icon} text-xl group-hover:text-primary transition-colors`}
                 ></i>
-                <span className="text-xs font-medium group-hover:text-primary transition-colors">
+                <span className="text-xs font-medium group-hover:text-primary transition-colors whitespace-nowrap truncate max-w-[72px]">
                   {section.name}
                 </span>
               </Link>
@@ -158,7 +169,12 @@ export default function RootLayout({
           </div>
         </nav>
 
-        <div className="pb-20 lg:pb-32">{children}</div>
+        {/* Mobile floating theme toggle (outside navbar) */}
+        <div className="lg:hidden fixed top-4 right-4 z-[1000] no-print">
+          <ThemeToggle />
+        </div>
+
+        <div className="pb-28 sm:pb-28 lg:pb-32">{children}</div>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

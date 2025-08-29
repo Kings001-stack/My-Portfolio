@@ -8,6 +8,7 @@ import React, {
   FormEvent,
 } from "react";
 import emailjs from "@emailjs/browser";
+import BubbleCursor from "../components/BubbleCursor";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -76,8 +77,9 @@ export default function Contact() {
   return (
     <div
       ref={contactRef}
-      className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 scroll-fade"
+      className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 scroll-fade relative"
     >
+      <BubbleCursor />
       <div className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl w-full max-w-4xl flex flex-col items-center">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6 glow-icon text-center">
           Contact Me

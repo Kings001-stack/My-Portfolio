@@ -524,3 +524,232 @@ textarea:focus {
     padding-bottom: 1.5rem !important;
   }
 }
+
+/* ================================
+   Light/Dark Theme Overrides
+   Controlled by: <html data-theme="light|dark">
+   ================================ */
+
+/* Default (dark) already defined above via hard-coded values. Add explicit dark scope if needed */
+[data-theme="dark"] body {
+  background: #000;
+  color: #fff;
+}
+
+/* Global body */
+[data-theme="light"] body {
+  background: #f8fafc; /* slate-50 */
+  color: #0a0a0a;
+}
+
+/* Navigation */
+[data-theme="light"] nav {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: #e5e7eb; /* gray-200 */
+}
+
+/* Glass cards */
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Inputs */
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+  background: #ffffff;
+  color: #111827; /* gray-900 */
+  border-color: #e5e7eb; /* gray-200 */
+}
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus {
+  outline: 2px solid #2563eb; /* blue-600 */
+}
+
+/* Glow button */
+[data-theme="light"] .glow-btn {
+  background: linear-gradient(90deg, #f3f4f6 60%, #e5e7eb 100%);
+  color: #0f172a; /* slate-900 */
+  border-color: #e5e7eb;
+  box-shadow: 0 2px 12px 0 #94a3b833; /* slate-400/20 */
+}
+[data-theme="light"] .glow-btn:hover {
+  border-color: #2563eb;
+  color: #0a0a0a;
+}
+
+/* Home feature card titles should stay white even in light mode */
+[data-theme="light"] .feature-card-title {
+  color: #ffffff !important;
+}
+
+/* Icon and image containers */
+[data-theme="light"] .glow-icon-animated,
+[data-theme="light"] .glow-image-icon {
+  background-color: #ffffff;
+  box-shadow: 2px 2px #00000010, 10px 1px 12px #00000010,
+    2px 2px 10px #00000010, 2px 2px 3px #00000010,
+    inset 2px 2px 10px #00000010, inset 2px 2px 10px #00000010,
+    inset 2px 2px 10px #00000010, inset 2px 2px 10px #00000010;
+}
+[data-theme="light"] .glow-icon-animated,
+[data-theme="light"] .glow-image-icon,
+[data-theme="light"] .glow-icon {
+  color: #0f172a; /* slate-900 */
+}
+
+/* Scrollbar */
+[data-theme="light"] ::-webkit-scrollbar {
+  background: #e5e7eb;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+}
+
+/* Tailwind utility overrides used in pages */
+[data-theme="light"] .bg-black {
+  background-color: #ffffff !important;
+}
+[data-theme="light"] .text-white {
+  color: #0a0a0a !important;
+}
+[data-theme="light"] .text-gray-50 {
+  color: #0f172a !important; /* slate-900 for contrast */
+}
+[data-theme="light"] .text-gray-300 {
+  color: #374151 !important; /* gray-700 */
+}
+[data-theme="light"] .border-gray-800 {
+  border-color: #e5e7eb !important;
+}
+[data-theme="light"] .border-gray-700 {
+  border-color: #e5e7eb !important;
+}
+[data-theme="light"] .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Mobile nav bg-black/90 override */
+[data-theme="light"] .bg-black\/90 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Arbitrary class bg-[#181818cc] used on contact form */
+[data-theme="light"] .bg-\[\#181818cc\] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ================================
+   Print Styles (global)
+   Moved from Resume page to avoid styled-jsx in Server Component
+   ================================ */
+@media print {
+  nav, .no-print { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  .glass { background: #fff !important; color: #000 !important; box-shadow: none !important; border: 1px solid #e5e7eb !important; }
+  .glow-icon { text-shadow: none !important; filter: none !important; }
+}
+
+/* ================================
+   Global Loader (orbiting dots)
+   Used by: app/loading.tsx
+   ================================ */
+.loader-orbit {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  color: #00e5ff; /* default accent */
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.6));
+}
+.loader-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px currentColor, 0 0 24px rgba(0, 229, 255, 0.7);
+}
+.loader-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+  opacity: 0.9;
+  border-radius: 9999px;
+  transform-origin: 28px 0; /* radius of orbit */
+  animation: loader-orbit-anim 1.2s linear infinite;
+}
+.loader-dot.delay-0 { animation-delay: 0s;    }
+.loader-dot.delay-1 { animation-delay: 0.15s; }
+.loader-dot.delay-2 { animation-delay: 0.3s;  }
+.loader-dot.delay-3 { animation-delay: 0.45s; }
+
+@keyframes loader-orbit-anim {
+  0%   { transform: rotate(0deg) translate(28px) rotate(0deg); }
+  100% { transform: rotate(360deg) translate(28px) rotate(-360deg); }
+}
+
+/* Light theme accent */
+[data-theme="light"] .loader-orbit {
+  color: #2563eb; /* blue-600 */
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.5));
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .loader-dot { animation: none; }
+  .loader-orbit { filter: none; }
+}
+
+/* ================================
+   Indeterminate Progress Bar (global)
+   Used by: app/loading.tsx
+   ================================ */
+.loader-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.loader-bar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0.2), rgba(0, 229, 255, 0.35));
+}
+.loader-shimmer {
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  filter: blur(2px);
+  animation: loader-shimmer 1.2s ease-in-out infinite;
+}
+@keyframes loader-shimmer {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+/* Light theme variant */
+[data-theme="light"] .loader-track {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+[data-theme="light"] .loader-bar {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.35));
+}
+
+/* Reduced motion: disable shimmer */
+@media (prefers-reduced-motion: reduce) {
+  .loader-shimmer { animation: none; display: none; }
+}

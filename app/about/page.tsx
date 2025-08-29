@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import Image from "next/image";
+import ImageCarousel from "../components/ImageCarousel";
 import Testimonials from "../components/Testimonials";
 
 function useScrollFade() {
@@ -48,7 +48,7 @@ export default function About() {
       name: "Mr Lukman",
       role: "HR",
       company: "Lincoln college of science, management and technology",
-      image: "/profile.png", // Using existing image as placeholder
+      image: "/Picture1.png", // Using existing image as placeholder
       text: "Emmanuel's work exceeded our expectations. His ability to translate our vision into a functional, elegant website while maintaining excellent communication throughout the project was impressive.",
     },
     {
@@ -70,13 +70,14 @@ export default function About() {
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6 glow-icon text-center">
           About Me
         </h1>
-        <Image
-          src="/mypic.jpg"
-          alt="My Photo"
+        <ImageCarousel
+          images={["/mypic.jpg", "/dp 2.jpg", "/profile.png"]}
           width={240}
           height={240}
-          priority
-          className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-[40px] mb-6 sm:mb-8 border-4 border-white shadow-lg img-effect"
+          autoPlayMs={3500}
+          roundedClass="rounded-[40px]"
+          fit="contain"
+          className="mb-6 sm:mb-8 shadow-lg"
         />
         <p className="w-full text-center text-sm sm:text-base lg:text-lg mb-6 px-4 sm:px-6 lg:px-8">
           Hi, I&apos;m{" "}

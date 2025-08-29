@@ -4,16 +4,6 @@ import React, { useRef, useEffect } from "react";
 
 const skills = [
   {
-    name: "HTML",
-    icon: "bi bi-filetype-html",
-    desc: "Semantic, accessible, SEO-friendly markup.",
-  },
-  {
-    name: "CSS",
-    icon: "bi bi-filetype-css",
-    desc: "Modern layouts, animations, and responsive design.",
-  },
-  {
     name: "JavaScript",
     icon: "bi bi-filetype-js",
     desc: "ES6+, TypeScript, async patterns, and frameworks.",
@@ -166,23 +156,23 @@ export default function Skills() {
   return (
     <div
       ref={skillsRef}
-      className="flex flex-col items-center justify-center min-h-screen bg-black text-white scroll-fade"
+      className="flex flex-col items-center justify-center min-h-screen bg-black text-white scroll-fade p-4 sm:p-6 lg:p-8"
     >
-      <div className="glass p-10 rounded-2xl shadow-2xl max-w-6xl w-full">
-        <h1 className="text-4xl font-extrabold mb-8 glow-icon">My Skill Set</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <div className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl max-w-6xl w-full">
+        <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 glow-icon">My Skill Set</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
           {skills.map((skill, index) => (
             <div
               key={skill.name}
               className="flex flex-col items-center p-4 rounded-xl glass shadow-lg hover:scale-105 transition-transform"
             >
               <div className={`glow-image-icon delay-${(index % 5) + 1} mb-2`}>
-                <i className={`${skill.icon} text-4xl`}></i>
+                <i className={`${skill.icon} text-3xl sm:text-4xl`}></i>
               </div>
-              <span className="text-lg font-semibold mt-2 mb-1">
+              <span className="text-base sm:text-lg font-semibold mt-2 mb-1 text-center">
                 {skill.name}
               </span>
-              <span className="text-sm text-gray-300 text-center">
+              <span className="text-sm sm:text-base text-gray-300 text-center">
                 {skill.desc}
               </span>
             </div>
