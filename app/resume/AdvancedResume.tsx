@@ -314,7 +314,7 @@ export default function AdvancedResume({ pdfPath = "/cv.pdf" }: { pdfPath?: stri
               aria-label="Embedded resume PDF"
             >
               <p className="p-4 text-sm">
-                Your browser couldn't display the PDF. {""}
+                Your browser couldn&apos;t display the PDF. {""}
                 <a className="underline" href={pdfPath} target="_blank" rel="noreferrer">
                   Open it in a new tab
                 </a>{" "}

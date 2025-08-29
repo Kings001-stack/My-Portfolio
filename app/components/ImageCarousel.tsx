@@ -32,7 +32,9 @@ export default function ImageCarousel({
   // autoplay
   useEffect(() => {
     if (!autoPlayMs) return;
-    timerRef.current && window.clearInterval(timerRef.current);
+    if (timerRef.current) {
+      window.clearInterval(timerRef.current);
+    }
     timerRef.current = window.setInterval(() => {
       setIndex((i) => (i + 1) % images.length);
     }, autoPlayMs);
