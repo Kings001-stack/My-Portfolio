@@ -8,7 +8,7 @@ function getSystemTheme(): "light" | "dark" {
     : "dark";
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ compact = false }: { compact?: boolean }) {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // Initialize from localStorage or system
@@ -30,15 +30,10 @@ export default function ThemeToggle() {
     <button
       aria-label="Toggle theme"
       onClick={toggle}
-      className="glow-btn flex items-center gap-2 whitespace-nowrap"
+      className={compact ? "p-2 rounded-xl border border-gray-800 bg-black/80" : "glow-btn flex items-center gap-2 whitespace-nowrap"}
       type="button"
     >
-      {theme === "dark" ? (
-        <i className="bi bi-sun"></i>
-      ) : (
-        <i className="bi bi-moon"></i>
-      )}
-      {/* <span className="hidden sm:inline">{theme === "dark" ? "Light" : "Dark"} mode</span> */}
+      {theme === "dark" ? <i className="bi bi-sun"></i> : <i className="bi bi-moon"></i>}
     </button>
   );
 }

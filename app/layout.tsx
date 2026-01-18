@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import ThemeToggle from "./components/ThemeToggle";
+import Image from "next/image";
+import ThreeBackground from "./components/ThreeBackground";
+import AnalyticsClient from "./components/AnalyticsClient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +22,6 @@ const sections = [
   { name: "Skills", href: "/skills", icon: "bi-code-slash" },
   { name: "About Me", href: "/about", icon: "bi-person" },
   { name: "Resume", href: "/resume", icon: "bi-file-earmark-text" },
-  { name: "Contact", href: "/contact", icon: "bi-envelope" },
 ];
 
 export const metadata: Metadata = {
@@ -56,7 +57,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: "Emmanuel King Ugwu - Software Designer & Full Stack Developer",
@@ -109,8 +112,27 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <ThreeBackground />
+        </div>
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex fixed bottom-8 left-1/2 transform -translate-x-1/2 px-8 py-3 items-center justify-between gap-8 z-[1000] max-w-4xl w-full">
+          <Link href="/" className="flex items-center gap-2 group">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={90}
+              height={90}
+              className="rounded-lg group-hover:scale-110 transition-transform duration-200"
+            />
+          </Link>
           <div className="flex gap-8">
             {sections.map((section) => (
               <Link
@@ -125,56 +147,69 @@ export default function RootLayout({
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <ThemeToggle />
-          <Link
-            href="/contact"
-            className="glow-btn flex items-center gap-2 whitespace-nowrap"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5"
+            <Link
+              href="/contact"
+              className="glow-btn flex items-center gap-2 whitespace-nowrap"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.5 7.5V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v.75m9 0v.75m0-.75h1.125A2.25 2.25 0 0120.25 9v7.5A2.25 2.25 0 0118 18.75H6A2.25 2.25 0 013.75 16.5V9A2.25 2.25 0 015.875 7.5H7.5m9 0h-9"
-              />
-            </svg>
-            Hire Me
-          </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.5 7.5V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v.75m9 0v.75m0-.75h1.125A2.25 2.25 0 0120.25 9v7.5A2.25 2.25 0 0118 18.75H6A2.25 2.25 0 013.75 16.5V9A2.25 2.25 0 015.875 7.5H7.5m9 0h-9"
+                />
+              </svg>
+              Hire Me
+            </Link>
           </div>
         </nav>
 
         {/* Mobile Navigation */}
-        <nav className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000] w-[95%] max-w-sm">
-          <div className="flex items-center justify-between bg-black/90 backdrop-blur-lg border border-gray-800 rounded-2xl px-4 py-3 shadow-2xl">
-            {sections.map((section) => (
+        <nav className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000] w-[96%] max-w-[420px]">
+          <div className="flex items-center justify-between bg-black/90 backdrop-blur-lg border border-gray-800 rounded-2xl px-2.5 py-2 shadow-2xl">
+
+            <div className="flex items-center gap-0.5 flex-1">
+              {sections.map((section) => (
+                <Link
+                  key={section.name}
+                  href={section.href}
+                  className="flex flex-1 min-w-0 flex-col items-center gap-0.5 p-1.5 rounded-xl transition-all duration-200 hover:bg-white/10 group text-center"
+                >
+                  <i
+                    className={`${section.icon} text-lg group-hover:text-primary transition-colors`}
+                  ></i>
+                  <span className="text-[11px] font-medium group-hover:text-primary transition-colors whitespace-nowrap truncate max-w-[64px]">
+                    {section.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div className="flex items-center pl-2">
               <Link
-                key={section.name}
-                href={section.href}
-                className="flex flex-1 min-w-0 flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 hover:bg-white/10 group text-center"
+                href="/contact"
+                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(0,102,255,0.6)] border border-blue-400/30 flex items-center gap-2 text-sm whitespace-nowrap animate-pulse"
+                style={{ animationDuration: '3s' }}
+                aria-label="Hire me"
               >
-                <i
-                  className={`${section.icon} text-xl group-hover:text-primary transition-colors`}
-                ></i>
-                <span className="text-xs font-medium group-hover:text-primary transition-colors whitespace-nowrap truncate max-w-[72px]">
-                  {section.name}
-                </span>
+                <i className="bi bi-briefcase-fill"></i>
+                Hire Me
               </Link>
-            ))}
+            </div>
           </div>
         </nav>
 
-        {/* Mobile floating theme toggle (outside navbar) */}
-        <div className="lg:hidden fixed top-4 right-4 z-[1000] no-print">
-          <ThemeToggle />
-        </div>
+        {/* Mobile floating controls removed; consolidated into bottom nav */}
 
-        <div className="pb-28 sm:pb-28 lg:pb-32">{children}</div>
+        <div className="pb-28 sm:pb-28 lg:pb-32">
+          <AnalyticsClient />
+          {children}
+        </div>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

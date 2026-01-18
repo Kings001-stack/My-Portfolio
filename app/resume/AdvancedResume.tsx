@@ -64,49 +64,49 @@ const data: ResumeData = {
   ],
   experience: [
     {
-      role: "Frontend Developer",
-      company: "Lincoln College of Science Management and Technology",
-      start: "Nov 2024",
-      end: "Jun 2025",
+      role: "Software Web Developer (Internship)",
+      company: "HNG Technology (HNG Tech)",
+      start: "2021",
+      end: "2022",
       bullets: [
-        "Collaborated with design teams to create user-friendly interfaces.",
-        "Created a modern and responsive website using the latest frontend frameworks and backend technologies.",
-        "Integrated RESTful APIs to enhance functionality.",
+        "Participated in an intensive internship program focused on web technologies.",
+        "Collaborated with teams to build and optimize web applications.",
+        "Gained hands-on experience with modern frontend and backend frameworks.",
       ],
     },
     {
-      role: "Full Stack Developer (Internship)",
-      company: "Realtime Bricks LTD",
-      start: "Mar 2024",
-      end: "Nov 2024",
+      role: "Software Developer",
+      company: "Realtime Bricks (Real Estate)",
+      start: "2022",
+      end: "2023",
       bullets: [
-        "Developed a maintainable web application using modern frameworks.",
-        "Conducted testing and debugging to ensure high-quality software.",
-        "Worked in an internship-based role to gain industry experience.",
-      ],
-    },
-    {
-      role: "UI/UX Designer (Internship)",
-      company: "HNG Tech",
-      start: "Jan 2020",
-      end: "Aug 2023",
-      bullets: [
-        "Supported UI/UX projects to design and improve web applications.",
+        "Developed and maintained software solutions for real estate management.",
+        "Optimized database queries and improved application performance.",
+        "Worked on integrating new features based on business requirements.",
       ],
     },
   ],
   education: [
     {
-      school: "Lincoln College of Science Management and Technology",
-      degree: "Diploma in Computer Software Engineering",
-      start: "Mar 2022",
-      end: "Present",
+      school: "Professional Studies",
+      degree: "Cyber Security",
+      start: "2025",
+      end: "Date",
+      details: ["Currently studying and specializing in Cyber Security."],
     },
     {
-      school: "HNG Tech",
-      degree: "Diploma in Computer Application Packages",
-      start: "Aug 2015",
-      end: "Aug 2019",
+      school: "Software Engineering Program",
+      degree: "Software Dev and Design",
+      start: "2021",
+      end: "2024",
+      details: ["Comprehensive study of software development principles and design patterns."],
+    },
+    {
+      school: "Technical Training",
+      degree: "Computer Application Packages",
+      start: "2020",
+      end: "2021",
+      details: ["Mastery of various computer application packages and tools."],
     },
   ],
 };
@@ -128,11 +128,10 @@ function Tabs({
           <button
             key={t.value}
             onClick={() => onChange(t.value)}
-            className={`rounded-lg py-2 text-sm font-medium transition-colors ${
-              current === t.value
-                ? "bg-white/10 text-white"
-                : "text-gray-300 hover:text-white"
-            }`}
+            className={`rounded-lg py-2 text-sm font-medium transition-colors ${current === t.value
+              ? "bg-white/10 text-white"
+              : "text-gray-300 hover:text-white"
+              }`}
             type="button"
           >
             {t.label}

@@ -7,8 +7,6 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from "react";
-import emailjs from "@emailjs/browser";
-import BubbleCursor from "../components/BubbleCursor";
 
 function useScrollFade() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -36,6 +34,9 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -44,34 +45,21 @@ export default function Contact() {
     setInput({ ...input, [name]: value });
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_yjgt9jm",
-        "template_bve5h3c",
-        formRef.current as HTMLFormElement,
-        {
-          publicKey: "Im2NveJS2CF3g-Rtt",
-        }
-      )
-      .then(
-        () => {
-          console.log("SUCCESS!");
-        },
-        (error: unknown) => {
-          if (
-            typeof error === "object" &&
-            error !== null &&
-            "text" in error &&
-            typeof (error as { text?: unknown }).text === "string"
-          ) {
-            console.log("FAILED...", (error as { text: string }).text);
-          } else {
-            console.log("FAILED...");
-          }
-        }
-      );
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(input),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      setStatus("sent");
+      setInput({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -79,7 +67,6 @@ export default function Contact() {
       ref={contactRef}
       className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8 scroll-fade relative"
     >
-      <BubbleCursor />
       <div className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl w-full max-w-4xl flex flex-col items-center">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6 glow-icon text-center">
           Contact Me
@@ -99,12 +86,12 @@ export default function Contact() {
               e93521365@gmail.com
             </a>
           </p>
-          <div className="flex gap-3 mt-2">
+          <div className="flex justify-center gap-6 mt-6">
             <a
               href="https://wa.link/vpsub2"
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-icon-animated delay-1"
+              className="glow-icon-animated delay-1 text-2xl hover:text-green-400 transition-colors"
             >
               <i className="bi bi-whatsapp"></i>
             </a>
@@ -112,7 +99,7 @@ export default function Contact() {
               href="https://github.com/Kings001-stack"
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-icon-animated delay-2"
+              className="glow-icon-animated delay-2 text-2xl hover:text-purple-400 transition-colors"
             >
               <i className="bi bi-github"></i>
             </a>
@@ -120,7 +107,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/emmanuel-king-ugwu/"
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-icon-animated delay-3"
+              className="glow-icon-animated delay-3 text-2xl hover:text-blue-400 transition-colors"
             >
               <i className="bi bi-linkedin"></i>
             </a>
@@ -168,6 +155,16 @@ export default function Contact() {
           <br />
           Let&apos;s build something amazing together!
         </div>
+        {status === "sent" && (
+          <div className="mt-3 text-primary text-center">
+            Message received. Thank you!
+          </div>
+        )}
+        {status === "error" && (
+          <div className="mt-3 text-red-400 text-center">
+            Failed to send. Try again.
+          </div>
+        )}
       </div>
     </div>
   );
