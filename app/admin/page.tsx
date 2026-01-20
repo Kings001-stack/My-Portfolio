@@ -37,6 +37,7 @@ export default function AdminPage() {
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [editingProject, setEditingProject] = useState<string | null>(null);
+  const [techInput, setTechInput] = useState("");
 
   const [profileForm, setProfileForm] = useState<Partial<Profile>>({
     name: "",
@@ -186,6 +187,7 @@ export default function AdminPage() {
           status: "draft",
         });
         setImageFile(null);
+        setTechInput("");
         setSuccess("Project updated successfully!");
         await fetchProjects();
       } else {
@@ -212,6 +214,7 @@ export default function AdminPage() {
           status: "draft",
         });
         setImageFile(null);
+        setTechInput("");
         setSuccess("Project created successfully!");
         await fetchProjects();
       } else {
@@ -229,12 +232,13 @@ export default function AdminPage() {
       title: project.title,
       slug: project.slug,
       description: project.description,
-      tech_stack: project.tech_stack,
+      tech_stack: Array.isArray(project.tech_stack) ? project.tech_stack : [],
       github_url: project.github_url,
       live_url: project.live_url,
       cover_image: project.cover_image,
       status: project.status,
     });
+    setTechInput("");
     // Scroll to form
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -252,6 +256,7 @@ export default function AdminPage() {
       status: "draft",
     });
     setImageFile(null);
+    setTechInput("");
   };
 
   const saveProfile = async () => {
@@ -403,24 +408,54 @@ export default function AdminPage() {
                   }
                   rows={3}
                 />
-                <input
-                  className="p-2 rounded bg-black border border-gray-700"
-                  placeholder="Tech stack (comma separated)"
-                  value={
-                    Array.isArray(form.tech_stack)
-                      ? form.tech_stack.join(", ")
-                      : ""
-                  }
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      tech_stack: e.target.value
-                        .split(",")
-                        .map((s) => s.trim())
-                        .filter(Boolean),
-                    })
-                  }
-                />
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-300">
+                    Tech Stack
+                  </label>
+                  <div className="p-2 rounded bg-black border border-gray-700 min-h-[42px] flex flex-wrap gap-2 items-center">
+                    {Array.isArray(form.tech_stack) && (form.tech_stack as string[]).map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 bg-primary/10 border border-primary/20 rounded-md text-sm text-primary flex items-center gap-2 group hover:bg-primary/20 transition-all"
+                      >
+                        {tech}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newStack = (form.tech_stack as string[]).filter((_, i) => i !== index);
+                            setForm({ ...form, tech_stack: newStack });
+                          }}
+                          className="text-primary/50 group-hover:text-primary"
+                        >
+                          <i className="bi bi-x-lg text-[10px]"></i>
+                        </button>
+                      </span>
+                    ))}
+                    <input
+                      className="bg-transparent border-none outline-none flex-1 min-w-[120px] text-sm"
+                      placeholder={Array.isArray(form.tech_stack) && form.tech_stack.length > 0 ? "Add more..." : "Type and press Enter (e.g. React)"}
+                      value={techInput}
+                      onChange={(e) => setTechInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === ",") {
+                          e.preventDefault();
+                          const val = techInput.trim().replace(/,$/, "");
+                          if (val && !((form.tech_stack as string[]).includes(val))) {
+                            setForm({
+                              ...form,
+                              tech_stack: [...(form.tech_stack as string[] || []), val],
+                            });
+                          }
+                          setTechInput("");
+                        } else if (e.key === "Backspace" && !techInput && Array.isArray(form.tech_stack) && form.tech_stack.length > 0) {
+                          const newStack = [...(form.tech_stack as string[])];
+                          newStack.pop();
+                          setForm({ ...form, tech_stack: newStack });
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
                 <input
                   className="p-2 rounded bg-black border border-gray-700"
                   placeholder="GitHub URL"

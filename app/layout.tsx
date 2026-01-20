@@ -171,34 +171,33 @@ export default function RootLayout({
         </nav>
 
         {/* Mobile Navigation */}
-        <nav className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000] w-[96%] max-w-[420px]">
-          <div className="flex items-center justify-between bg-black/90 backdrop-blur-lg border border-gray-800 rounded-2xl px-2.5 py-2 shadow-2xl">
+        <nav className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000] w-[96%] max-w-[400px]">
+          <div className="flex items-center justify-between bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl px-1 py-1 shadow-2xl">
 
-            <div className="flex items-center gap-0.5 flex-1">
+            <div className="flex items-center gap-0 flex-1 min-w-0 overflow-hidden">
               {sections.map((section) => (
                 <Link
                   key={section.name}
                   href={section.href}
-                  className="flex flex-1 min-w-0 flex-col items-center gap-0.5 p-1.5 rounded-xl transition-all duration-200 hover:bg-white/10 group text-center"
+                  className="flex flex-1 min-w-0 flex-col items-center gap-0 p-0.5 rounded-md transition-all duration-200 hover:bg-white/5 group text-center"
                 >
                   <i
-                    className={`${section.icon} text-lg group-hover:text-primary transition-colors`}
+                    className={`${section.icon} text-[12px] group-hover:text-primary transition-colors`}
                   ></i>
-                  <span className="text-[11px] font-medium group-hover:text-primary transition-colors whitespace-nowrap truncate max-w-[64px]">
+                  <span className="text-[8px] font-medium group-hover:text-primary transition-colors whitespace-nowrap truncate w-full px-0.5">
                     {section.name}
                   </span>
                 </Link>
               ))}
             </div>
-            <div className="flex items-center pl-2">
+            <div className="flex items-center flex-shrink-0 pl-1.5">
               <Link
                 href="/contact"
-                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(0,102,255,0.6)] border border-blue-400/30 flex items-center gap-2 text-sm whitespace-nowrap animate-pulse"
-                style={{ animationDuration: '3s' }}
+                className="hire-animate px-3 py-1.5 text-white font-bold rounded-xl border border-white/10 flex items-center justify-center gap-1.5 text-[11px] whitespace-nowrap shadow-xl"
                 aria-label="Hire me"
               >
-                <i className="bi bi-briefcase-fill"></i>
-                Hire Me
+                <i className="bi bi-briefcase-fill text-[11px]"></i>
+                <span className="tracking-tight">Hire Me</span>
               </Link>
             </div>
           </div>

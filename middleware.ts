@@ -5,7 +5,7 @@ export const config = {
   matcher: ["/admin/:path*"],
 };
 
-export async function proxy(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;

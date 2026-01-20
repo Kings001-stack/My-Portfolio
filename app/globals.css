@@ -1,5 +1,35 @@
 @import "tailwindcss";
 
+@keyframes hire-glow {
+
+  0%,
+  100% {
+    background-color: #dc2626;
+    /* Professional Red */
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.5);
+    border-color: rgba(220, 38, 38, 0.3);
+  }
+
+  33% {
+    background-color: #059669;
+    /* Professional Green */
+    box-shadow: 0 0 12px rgba(5, 150, 105, 0.5);
+    border-color: rgba(5, 150, 105, 0.3);
+  }
+
+  66% {
+    background-color: #2563eb;
+    /* Professional Blue */
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+    border-color: rgba(37, 99, 235, 0.3);
+  }
+}
+
+.hire-animate {
+  animation: hire-glow 9s infinite ease-in-out;
+  transition: all 0.5s ease;
+}
+
 /* Pill-shaped profile image styles */
 .profile-pill {
   border-radius: 9999px 9999px 9999px 9999px;

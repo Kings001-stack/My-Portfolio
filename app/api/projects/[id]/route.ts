@@ -2,16 +2,9 @@ import { NextResponse } from "next/server";
 import {
   getAdminSupabase,
   getServerSupabase,
+  isAdmin,
 } from "@/lib/supabase/serverClient";
 import type { Project } from "@/lib/supabase/types";
-
-function isAdmin(email: string | null): boolean {
-  const emails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
-    .split(",")
-    .map((e) => e.trim())
-    .filter(Boolean);
-  return !!email && emails.includes(email);
-}
 
 export async function PUT(
   req: Request,
@@ -19,8 +12,15 @@ export async function PUT(
 ) {
   const { id } = await params;
   const server = await getServerSupabase();
-  const { data: sessionData } = await server.auth.getUser();
-  if (!isAdmin(sessionData.user?.email ?? null)) {
+  const { data: sessionData, error: sessionError } = await server.auth.getUser();
+
+  if (sessionError) {
+    console.error("[Auth] Session error:", sessionError);
+  }
+
+  const userEmail = sessionData.user?.email ?? null;
+
+  if (!isAdmin(userEmail)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const body = await req.json();
@@ -45,8 +45,15 @@ export async function DELETE(
 ) {
   const { id } = await params;
   const server = await getServerSupabase();
-  const { data: sessionData } = await server.auth.getUser();
-  if (!isAdmin(sessionData.user?.email ?? null)) {
+  const { data: sessionData, error: sessionError } = await server.auth.getUser();
+
+  if (sessionError) {
+    console.error("[Auth] Session error (DELETE):", sessionError);
+  }
+
+  const userEmail = sessionData.user?.email ?? null;
+
+  if (!isAdmin(userEmail)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const admin = getAdminSupabase();

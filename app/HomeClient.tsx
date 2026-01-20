@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import EnhancedCodeEditor from "./components/EnhancedCodeEditor";
 import TypedText from "./components/TypedText";
 import Testimonials from "./components/Testimonials";
+import ProjectModal from "./components/ProjectModal";
 import type { Project } from "@/lib/supabase/types";
 import type { Profile } from "@/lib/supabase/types";
 
@@ -41,6 +42,7 @@ export default function HomeClient() {
   const [input, setInput] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState<false | "ok" | "err">(false);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const sampleCode = String.raw`const dev = {
   name: 'Emmanuel King',
@@ -261,18 +263,7 @@ console.log(dev.name);`;
       </section>
 
       {/* SKILLS SECTION - New Design */}
-      <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-black/30 relative overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0 100%)",
-            background:
-              "linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.7))",
-            borderTop: "1px solid rgba(148,163,184,0.35)",
-            borderBottom: "1px solid rgba(148,163,184,0.35)",
-          }}
-        />
+      <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-black/60 relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
           <h3 className="text-3xl sm:text-4xl font-bold mb-12 text-white text-center">
             My Skills
@@ -599,12 +590,11 @@ console.log(dev.name);`;
               <div className="service-content">
                 <h3 className="service-title">UI/UX Design</h3>
                 <p className="service-description">
-                  Crafting visually stunning and user-centric designs that ensure seamless user experiences. From wireframes to high-fidelity prototypes, I focus on creating intuitive interfaces that blend creativity and functionality, enhancing engagement and usability.
+                  Designing immersive digital experiences with a focus on user psychology and visual harmony. I create high-fidelity prototypes and design systems that ensure your product is not only beautiful but also intuitive and accessible across all devices.
                 </p>
                 <div className="service-footer">
                   <Link href="https://github.com/Kings001-stack" target="_blank" className="social-icon-btn hover-glow-blue" aria-label="GitHub"><i className="bi bi-github"></i></Link>
                   <Link href="https://www.linkedin.com/in/emmanuel-king-ugwu/" target="_blank" className="social-icon-btn hover-glow-blue" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></Link>
-                  <Link href="#" className="social-icon-btn hover-glow-blue" aria-label="YouTube"><i className="bi bi-youtube"></i></Link>
                 </div>
               </div>
             </div>
@@ -618,12 +608,11 @@ console.log(dev.name);`;
               <div className="service-content">
                 <h3 className="service-title">Web Development</h3>
                 <p className="service-description">
-                  Building responsive, dynamic, and high-performance websites tailored to your needs. Using modern technologies like React, Node.js, and more, I ensure your site is optimized for speed, scalability, and accessibility, delivering a robust online presence.
+                  Engineering robust, scalable web applications using the latest industry standards. From high-performance React frontends to secure Node.js backends, I deliver full-stack solutions optimized for SEO, speed, and seamless cross-browser compatibility.
                 </p>
                 <div className="service-footer">
                   <Link href="https://github.com/Kings001-stack" target="_blank" className="social-icon-btn hover-glow-red" aria-label="GitHub"><i className="bi bi-github"></i></Link>
                   <Link href="https://www.linkedin.com/in/emmanuel-king-ugwu/" target="_blank" className="social-icon-btn hover-glow-red" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></Link>
-                  <Link href="#" className="social-icon-btn hover-glow-red" aria-label="YouTube"><i className="bi bi-youtube"></i></Link>
                 </div>
               </div>
             </div>
@@ -637,12 +626,11 @@ console.log(dev.name);`;
               <div className="service-content">
                 <h3 className="service-title">Mobile Development</h3>
                 <p className="service-description">
-                  Producing compelling digital content that resonates with your audience. From blogs and technical documentation to engaging website copy, I ensure your brand&apos;s message is clear, impactful, and aligned with your business goals.
+                  Developing high-performance native and cross-platform mobile apps that provide a smooth, app-like experience. I focus on creating feature-rich applications with offline capabilities, push notifications, and perfectly fluid animations.
                 </p>
                 <div className="service-footer">
                   <Link href="https://github.com/Kings001-stack" target="_blank" className="social-icon-btn hover-glow-green" aria-label="GitHub"><i className="bi bi-github"></i></Link>
                   <Link href="https://www.linkedin.com/in/emmanuel-king-ugwu/" target="_blank" className="social-icon-btn hover-glow-green" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></Link>
-                  <Link href="#" className="social-icon-btn hover-glow-green" aria-label="YouTube"><i className="bi bi-youtube"></i></Link>
                 </div>
               </div>
             </div>
@@ -681,12 +669,12 @@ console.log(dev.name);`;
                   {p.description}
                 </div>
                 <div className="flex gap-2">
-                  <Link
-                    href={`/projects/${p.slug}`}
+                  <button
+                    onClick={() => setSelectedProject(p)}
                     className="glow-btn text-sm"
                   >
                     Case Study
-                  </Link>
+                  </button>
                   {p.live_url && (
                     <a
                       href={p.live_url}
@@ -843,11 +831,33 @@ console.log(dev.name);`;
       </section>
 
       {/* FOOTER */}
-      <footer className="w-full py-8 text-center text-gray-400 border-t border-gray-800">
-        <p className="text-lg">
-          Made with next.js and extreme levels of caffeine ☕☕☕
-        </p>
+      <footer className="w-full py-12 px-4 text-center text-gray-400 border-t border-white/5 bg-black/20">
+        <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={45}
+              height={45}
+              className="rounded-xl shadow-2xl border border-white/10"
+            />
+            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500 tracking-tighter">
+              Emmanuel King
+            </span>
+          </div>
+          <p className="text-sm sm:text-base md:text-lg max-w-sm sm:max-w-none mx-auto leading-relaxed">
+            Made with <span className="text-blue-400 font-medium">next.js</span> and extreme levels of caffeine <span className="inline-block animate-pulse">☕☕☕</span>
+          </p>
+          <div className="text-[10px] text-gray-600 uppercase tracking-[0.2em] font-medium">
+            © {new Date().getFullYear()} Emmanuel King · Developer & Designer
+          </div>
+        </div>
       </footer>
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </div>
   );
 }
