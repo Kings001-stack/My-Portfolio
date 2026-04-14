@@ -102,10 +102,10 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Initial theme to avoid flash */}
+        {/* Theme is permanently set to dark, avoiding flash of unstyled content */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(() => { try { const s = localStorage.getItem('theme'); const t = s || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();`,
+            __html: `(() => { document.documentElement.setAttribute('data-theme', 'dark'); })();`,
           }}
         />
       </head>
@@ -171,33 +171,32 @@ export default function RootLayout({
         </nav>
 
         {/* Mobile Navigation */}
-        <nav className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000] w-[96%] max-w-[400px]">
-          <div className="flex items-center justify-between bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl px-1 py-1 shadow-2xl">
-
-            <div className="flex items-center gap-0 flex-1 min-w-0 overflow-hidden">
+        <nav className="lg:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[1000] w-[95%] max-w-[400px]">
+          <div className="flex items-center justify-between bg-[#0a0a0a]/90 backdrop-blur-3xl border border-white/10 rounded-full p-2 shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
+            <div className="flex items-center justify-evenly flex-1 px-1">
               {sections.map((section) => (
                 <Link
                   key={section.name}
                   href={section.href}
-                  className="flex flex-1 min-w-0 flex-col items-center gap-0 p-0.5 rounded-md transition-all duration-200 hover:bg-white/5 group text-center"
+                  className="flex flex-col items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:bg-white/10 group relative"
+                  title={section.name}
                 >
                   <i
-                    className={`${section.icon} text-[12px] group-hover:text-primary transition-colors`}
+                    className={`${section.icon} text-[22px] text-gray-400 group-hover:text-white group-hover:scale-110 transition-all`}
                   ></i>
-                  <span className="text-[8px] font-medium group-hover:text-primary transition-colors whitespace-nowrap truncate w-full px-0.5">
+                  <span className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-[10px] py-1 px-2 rounded-lg border border-white/10 pointer-events-none whitespace-nowrap">
                     {section.name}
                   </span>
                 </Link>
               ))}
             </div>
-            <div className="flex items-center flex-shrink-0 pl-1.5">
+            <div className="pl-2 border-l border-white/10 flex-shrink-0">
               <Link
                 href="/contact"
-                className="hire-animate px-3 py-1.5 text-white font-bold rounded-xl border border-white/10 flex items-center justify-center gap-1.5 text-[11px] whitespace-nowrap shadow-xl"
+                className="flex items-center justify-center h-12 px-5 bg-gradient-to-r from-blue-500 to-blue-300 hover:from-blue-400 hover:to-blue-200 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.4)] transform hover:scale-105"
                 aria-label="Hire me"
               >
-                <i className="bi bi-briefcase-fill text-[11px]"></i>
-                <span className="tracking-tight">Hire Me</span>
+                Hire Me
               </Link>
             </div>
           </div>

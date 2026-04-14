@@ -124,7 +124,7 @@ console.log(dev.name);`;
                 backSpeed={60}
                 backDelay={1500}
                 loop
-                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 drop-shadow-[0_0_10px_rgba(96,165,250,0.4)]"
                 cursorChar="|"
               />
             </h1>
@@ -186,7 +186,7 @@ console.log(dev.name);`;
                   </span>
                   <span className="text-gray-300">
                     , a passionate Full Stack Developer and Software Designer
-                    with over 4 years of experience crafting digital experiences
+                    with over 5 years of experience crafting digital experiences
                     that make a difference.
                   </span>
                 </p>
