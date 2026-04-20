@@ -4,12 +4,24 @@ interface EnhancedCodeEditorProps {
   code: string;
   language?: string;
   fileName?: string;
-  theme?: "dark" | "darker" | "oceanic";
+  theme?: "dark" | "darker" | "oceanic" | "macbook";
   style?: React.CSSProperties;
   highlightSyntax?: boolean;
 }
 
-const themes = {
+interface Theme {
+  background: string;
+  headerBg: string;
+  lineNumbersBg: string;
+  lineNumbersColor: string;
+  textColor: string;
+  borderColor: string;
+  dotRed?: string;
+  dotYellow?: string;
+  dotGreen?: string;
+}
+
+const themes: Record<string, Theme> = {
   dark: {
     background: "#1e1e1e",
     headerBg: "#2d2d30",
@@ -33,6 +45,17 @@ const themes = {
     lineNumbersColor: "#65737e",
     textColor: "#cdd3de",
     borderColor: "#4f5b66",
+  },
+  macbook: {
+    background: "#1e1e1e",
+    headerBg: "#323233",
+    lineNumbersBg: "#1e1e1e",
+    lineNumbersColor: "#6e7681",
+    textColor: "#e6edf3",
+    borderColor: "#30363d",
+    dotRed: "#ff5f56",
+    dotYellow: "#ffbd2e",
+    dotGreen: "#27c93f",
   },
 };
 
@@ -205,10 +228,12 @@ const EnhancedCodeEditor: React.FC<EnhancedCodeEditorProps> = ({
     <div
       style={{
         background: currentTheme.background,
-        borderRadius: 10,
-        boxShadow: "0 4px 32px rgba(0, 0, 0, 0.4)",
-        fontFamily: "Fira Mono, Menlo, Monaco, Consolas, monospace",
-        fontSize: 15,
+        borderRadius: 12,
+        boxShadow:
+          "0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)",
+        fontFamily:
+          "'SF Mono', 'Fira Code', 'Menlo', 'Monaco', 'Consolas', monospace",
+        fontSize: 14,
         color: currentTheme.textColor,
         padding: 0,
         overflow: "hidden",
@@ -217,20 +242,74 @@ const EnhancedCodeEditor: React.FC<EnhancedCodeEditorProps> = ({
         ...style,
       }}
     >
-      {/* Simple Editor Header */}
+      {/* MacBook-style Header with Traffic Lights */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          height: 36,
+          justifyContent: "space-between",
+          height: 40,
           background: currentTheme.headerBg,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
           padding: "0 16px",
+          borderBottom: `1px solid ${currentTheme.borderColor}`,
         }}
       >
-        <span style={{ color: "#a3a3a3", fontSize: 13 }}>
-          {fileName} - {language}
+        {/* Traffic Light Dots */}
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: currentTheme.dotRed || "#ff5f56",
+              boxShadow: "0 1px 2px rgba(0,0,0,0.3)",
+            }}
+          />
+          <div
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: currentTheme.dotYellow || "#ffbd2e",
+              boxShadow: "0 1px 2px rgba(0,0,0,0.3)",
+            }}
+          />
+          <div
+            style={{
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: currentTheme.dotGreen || "#27c93f",
+              boxShadow: "0 1px 2px rgba(0,0,0,0.3)",
+            }}
+          />
+        </div>
+
+        {/* File Name */}
+        <span
+          style={{
+            color: "#8b949e",
+            fontSize: 13,
+            fontWeight: 500,
+            letterSpacing: "0.3px",
+          }}
+        >
+          {fileName}
+        </span>
+
+        {/* Language Badge */}
+        <span
+          style={{
+            color: "#58a6ff",
+            fontSize: 11,
+            fontWeight: 600,
+            textTransform: "uppercase",
+            letterSpacing: "0.5px",
+          }}
+        >
+          {language}
         </span>
       </div>
 
@@ -239,26 +318,28 @@ const EnhancedCodeEditor: React.FC<EnhancedCodeEditorProps> = ({
         style={{
           display: "flex",
           width: "100%",
-          maxHeight: "400px",
+          maxHeight: "450px",
           overflowY: "auto",
+          background: currentTheme.background,
         }}
       >
         {/* Line Numbers */}
         <div
           style={{
-            padding: "12px 0",
+            padding: "16px 0",
             background: currentTheme.lineNumbersBg,
             color: currentTheme.lineNumbersColor,
             userSelect: "none",
             textAlign: "right",
-            paddingRight: 12,
-            minWidth: 40,
-            fontSize: 14,
-            borderRight: `1px solid ${currentTheme.borderColor}`,
+            paddingRight: 16,
+            paddingLeft: 16,
+            minWidth: 50,
+            fontSize: 13,
+            fontWeight: 500,
           }}
         >
           {lines.map((_, i) => (
-            <div key={i} style={{ height: 22, lineHeight: "22px" }}>
+            <div key={i} style={{ height: 24, lineHeight: "24px" }}>
               {i + 1}
             </div>
           ))}
@@ -267,25 +348,36 @@ const EnhancedCodeEditor: React.FC<EnhancedCodeEditorProps> = ({
         {/* Code Content */}
         <div
           style={{
-            padding: "12px 16px",
+            padding: "16px 20px",
             minWidth: 0,
             width: "100%",
             overflowX: "auto",
+            fontSize: 14,
+            lineHeight: "24px",
           }}
         >
           {lines.map((line, i) => renderHighlightedLine(line, i))}
         </div>
       </div>
 
-      {/* Simplified Status Bar */}
+      {/* Status Bar */}
       <div
         style={{
-          height: 4,
+          height: 28,
           background: currentTheme.headerBg,
-          borderBottomLeftRadius: 10,
-          borderBottomRightRadius: 10,
+          borderBottomLeftRadius: 12,
+          borderBottomRightRadius: 12,
+          borderTop: `1px solid ${currentTheme.borderColor}`,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 16px",
+          fontSize: 11,
+          color: "#8b949e",
         }}
-      ></div>
+      >
+        <span>UTF-8</span>
+        <span style={{ marginLeft: "auto" }}>Ln 1, Col 1</span>
+      </div>
     </div>
   );
 };

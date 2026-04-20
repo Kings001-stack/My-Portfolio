@@ -87,12 +87,12 @@ export default function About() {
           platforms.
           <br />
           <br />
-          <span className="text-primary">Expertise:</span> React, Next.js,
+          {/* <span className="text-primary">Expertise:</span> React, Next.js,
           Node.js, Python, PHP, MySQL, MongoDB, and more.
           <br />
           <span className="text-primary">Strengths:</span> UI/UX design,
           performance optimization, clean code, and creative problem-solving.
-          <br />
+          <br /> */}
           <span className="text-primary">Interests:</span> 3D web, animation,
           open source, and AI-driven interfaces.
         </p>

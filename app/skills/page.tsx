@@ -1,135 +1,68 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 
-const skills = [
+const skillCategories = [
   {
-    name: "JavaScript",
-    icon: "bi bi-filetype-js",
-    desc: "ES6+, TypeScript, async patterns, and frameworks.",
+    title: "Frontend Alchemy",
+    color: "text-blue-400",
+    skills: [
+      { name: "React 19", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Next.js 15", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS 4", icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
+      { name: "Three.js / R3F", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
+      { name: "Framer Motion", icon: "https://pagepro.co/blog/wp-content/uploads/2020/03/framer-motion.png" },
+    ],
   },
   {
-    name: "PHP",
-    icon: "bi bi-filetype-php",
-    desc: "Backend APIs, CMS, and server-side logic.",
+    title: "Robust Backends",
+    color: "text-green-400",
+    skills: [
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Supabase", icon: "https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-icon.svg" },
+      { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    ],
   },
   {
-    name: "MySQL",
-    icon: "bi bi-filetype-sql",
-    desc: "Relational data modeling and performant queries.",
+    title: "System Engineering",
+    color: "text-purple-400",
+    skills: [
+      { name: "System Design", icon: "bi bi-diagram-3" },
+      { name: "Microservices", icon: "bi bi-boxes" },
+      { name: "Security (OWASP)", icon: "bi bi-shield-lock" },
+      { name: "Performance Tuning", icon: "bi bi-speedometer2" },
+      { name: "Web Vitals", icon: "bi bi-graph-up-arrow" },
+      { name: "Scalability", icon: "bi bi-arrow-up-right-circle" },
+    ],
   },
   {
-    name: "ReactJS",
-    icon: "bi bi-filetype-jsx",
-    desc: "Component-driven UIs, hooks, and state management.",
+    title: "Modern DevOps",
+    color: "text-orange-400",
+    skills: [
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+      { name: "AWS / Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "CI/CD Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
+      { name: "Linux / Bash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+    ],
   },
   {
-    name: "Next.js",
-    icon: "bi bi-lightning",
-    desc: "SSR, SSG, API routes, and full-stack apps.",
-  },
-  {
-    name: "MongoDB",
-    icon: "bi bi-database",
-    desc: "NoSQL, aggregation, and scalable data storage.",
-  },
-  {
-    name: "Python",
-    icon: "bi bi-filetype-py",
-    desc: "Automation, scripting, and data analysis.",
-  },
-  {
-    name: "React Native/Expo CLI",
-    icon: "bi bi-phone",
-    desc: "Cross-platform mobile apps with native feel.",
-  },
-  {
-    name: "UI/UX design",
-    icon: "bi bi-palette",
-    desc: "Design application/software for the best experience of a user",
-  },
-  // Security & Best Practices
-  {
-    name: "Web Security",
-    icon: "bi bi-shield-check",
-    desc: "OWASP Top 10, JWT authentication, secure coding practices.",
-  },
-  {
-    name: "Secure Dev Practices",
-    icon: "bi bi-shield-lock",
-    desc: "Static code analysis, encryption basics, security testing.",
-  },
-  {
-    name: "Auth & Identity",
-    icon: "bi bi-person-check",
-    desc: "OAuth2, OpenID Connect, SSO integrations, identity management.",
-  },
-  // Data & AI
-  {
-    name: "PostgreSQL",
-    icon: "bi bi-database",
-    desc: "Advanced relational database management and optimization.",
-  },
-  {
-    name: "Redis",
-    icon: "bi bi-lightning-charge",
-    desc: "In-memory data structure store, caching, and session management.",
-  },
-  {
-    name: "Data Engineering",
-    icon: "bi bi-gear-wide-connected",
-    desc: "ETL pipelines, Apache Kafka, data processing workflows.",
-  },
-  {
-    name: "Machine Learning",
-    icon: "bi bi-cpu",
-    desc: "TensorFlow, PyTorch, model development and deployment.",
-  },
-  {
-    name: "LLM Integration",
-    icon: "bi bi-robot",
-    desc: "OpenAI API, large language model integration and fine-tuning.",
-  },
-  {
-    name: "Vector Databases",
-    icon: "bi bi-diagram-3",
-    desc: "Pinecone, Weaviate, FAISS for AI-powered search and retrieval.",
-  },
-  // Cloud & DevOps
-  {
-    name: "AWS",
-    icon: "bi bi-cloud",
-    desc: "Cloud infrastructure, services, and scalable deployments.",
-  },
-  {
-    name: "Azure",
-    icon: "bi bi-cloud-arrow-up",
-    desc: "Microsoft cloud platform and enterprise solutions.",
-  },
-  {
-    name: "Google Cloud",
-    icon: "bi bi-cloud-check",
-    desc: "GCP services, AI/ML tools, and cloud-native development.",
-  },
-  {
-    name: "CI/CD Pipelines",
-    icon: "bi bi-arrow-repeat",
-    desc: "GitHub Actions, GitLab CI, Jenkins automation workflows.",
-  },
-  {
-    name: "Docker",
-    icon: "bi bi-box",
-    desc: "Containerization, microservices, and deployment consistency.",
-  },
-  {
-    name: "Kubernetes",
-    icon: "bi bi-diagram-2",
-    desc: "Container orchestration, scaling, and cluster management.",
-  },
-  {
-    name: "Infrastructure as Code",
-    icon: "bi bi-code-square",
-    desc: "Terraform, Pulumi, automated infrastructure provisioning.",
+    title: "Future-Proof (AI/ML)",
+    color: "text-cyan-400",
+    skills: [
+      { name: "LLM Integration", icon: "bi bi-robot" },
+      { name: "Vector DBs", icon: "bi bi-cpu" },
+      { name: "RAG Systems", icon: "bi bi-search" },
+      { name: "Gemini / OpenAI", icon: "bi bi-stars" },
+      { name: "Audio (TTS/STT)", icon: "bi bi-mic" },
+      { name: "DeepSeek API", icon: "bi bi-code-square" },
+    ],
   },
 ];
 
@@ -151,32 +84,85 @@ function useScrollFade() {
   return ref;
 }
 
-export default function Skills() {
+export default function SkillsPage() {
   const skillsRef = useScrollFade();
+
   return (
-    <div
-      ref={skillsRef}
-      className="flex flex-col items-center justify-center min-h-screen bg-black text-white scroll-fade p-4 sm:p-6 lg:p-8"
-    >
-      <div className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl max-w-6xl w-full">
-        <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 glow-icon">My Skill Set</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
-          {skills.map((skill, index) => (
+    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div ref={skillsRef} className="scroll-fade text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6">
+            Expertise & <span className="text-primary">Skills</span>
+          </h1>
+          <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto">
+            A comprehensive overview of my technical arsenal, specialized in building
+            high-performance, scalable, and visually stunning digital solutions.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {skillCategories.map((category) => (
             <div
-              key={skill.name}
-              className="flex flex-col items-center p-4 rounded-xl glass shadow-lg hover:scale-105 transition-transform"
+              key={category.title}
+              className="glass p-8 rounded-3xl relative overflow-hidden group hover:border-primary/30 transition-all duration-300"
             >
-              <div className={`glow-image-icon delay-${(index % 5) + 1} mb-2`}>
-                <i className={`${skill.icon} text-3xl sm:text-4xl`}></i>
+              <div
+                className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors"
+                aria-hidden="true"
+              />
+
+              <h2 className={`text-2xl font-bold mb-8 ${category.color} flex items-center gap-3`}>
+                <span className="w-8 h-1 bg-current rounded-full" />
+                {category.title}
+              </h2>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {category.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all duration-200 group/skill"
+                  >
+                    <div className="w-12 h-12 flex items-center justify-center relative">
+                      {skill.icon.startsWith("http") ? (
+                        <Image
+                          src={skill.icon}
+                          alt={skill.name}
+                          width={40}
+                          height={40}
+                          className="w-10 h-10 object-contain group-hover/skill:scale-110 transition-transform duration-300"
+                        />
+                      ) : (
+                        <i className={`${skill.icon} text-3xl group-hover/skill:scale-110 transition-transform duration-300`} />
+                      )}
+                    </div>
+                    <span className="text-sm font-medium text-gray-300 group-hover/skill:text-white transition-colors text-center">
+                      {skill.name}
+                    </span>
+                  </div>
+                ))}
               </div>
-              <span className="text-base sm:text-lg font-semibold mt-2 mb-1 text-center">
-                {skill.name}
-              </span>
-              <span className="text-sm sm:text-base text-gray-300 text-center">
-                {skill.desc}
-              </span>
             </div>
           ))}
+
+          {/* Specialization Highlight Card */}
+          <div className="glass p-8 rounded-3xl flex flex-col justify-center items-center text-center bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
+            <div className="text-primary mb-4">
+              <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold mb-4">Senior Architectural Mindset</h3>
+            <p className="text-gray-400">
+              Beyond languages and frameworks, I focus on the &quot;Why&quot; and &quot;How&quot;.
+              My approach involves rigorous testing, clean code architecture,
+              and optimizing for zero-latency user experiences.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <span className="px-4 py-2 bg-primary/10 rounded-full text-primary text-xs font-bold uppercase tracking-wider">TDD/BDD</span>
+              <span className="px-4 py-2 bg-primary/10 rounded-full text-primary text-xs font-bold uppercase tracking-wider">Agile/Scrum</span>
+              <span className="px-4 py-2 bg-primary/10 rounded-full text-primary text-xs font-bold uppercase tracking-wider">Domain Driven Design</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

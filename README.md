@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Emmanuel King Ugwu - Portfolio
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 15, React 19, and Tailwind CSS 4.
 
-First, run the development server:
+## 🚀 Features
 
+- **Modern Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS 4
+- **3D Graphics**: Three.js integration with React Three Fiber
+- **Backend**: Supabase for authentication, database, and storage
+- **Responsive Design**: Mobile-first approach with glassmorphic UI
+- **Dark Mode**: Optimized for dark theme
+- **SEO Optimized**: Meta tags, Open Graph, and structured data
+- **Performance**: Optimized images, lazy loading, and code splitting
+
+## 📋 Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Supabase account
+
+## 🛠️ Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd my-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+   - Copy `.env.example` to `.env.local`
+   - Fill in your Supabase credentials and admin email
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ Build for Production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Deployment
 
-## Deploy on Vercel
+### Vercel (Recommended)
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Other Platforms
+- Netlify
+- Railway
+- AWS Amplify
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🗂️ Project Structure
+
+```
+my-app/
+├── app/
+│   ├── components/     # Reusable components
+│   ├── api/           # API routes
+│   ├── projects/      # Projects page
+│   ├── skills/        # Skills page
+│   ├── resume/        # Resume page
+│   └── contact/       # Contact page
+├── public/            # Static assets
+├── lib/              # Utilities and configurations
+└── middleware.ts     # Route protection
+```
+
+## 🔐 Environment Variables
+
+See `.env.example` for required variables.
+
+## 📄 License
+
+MIT License - feel free to use this project for your own portfolio!
+
+## 👨‍💻 Author
+
+**Emmanuel King Ugwu**
+- Portfolio: [Your Domain]
+- GitHub: [@Kings001-stack](https://github.com/Kings001-stack)
+- LinkedIn: [Emmanuel King Ugwu](https://www.linkedin.com/in/emmanuel-king-ugwu/)
+
+---
+
+Built with ❤️ using Next.js

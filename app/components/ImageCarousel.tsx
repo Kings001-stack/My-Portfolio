@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 
 type Props = {
@@ -25,9 +25,9 @@ export default function ImageCarousel({
   const timerRef = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const goTo = (i: number) => setIndex(((i % images.length) + images.length) % images.length);
-  const next = () => goTo(index + 1);
-  const prev = () => goTo(index - 1);
+  const goTo = useCallback((i: number) => setIndex(((i % images.length) + images.length) % images.length), [images.length]);
+  const next = useCallback(() => goTo(index + 1), [goTo, index]);
+  const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
   // autoplay
   useEffect(() => {
@@ -72,7 +72,8 @@ export default function ImageCarousel({
       el.removeEventListener("touchmove", onTouchMove);
       el.removeEventListener("touchend", onTouchEnd);
     };
-  }, []);
+
+  }, [next, prev]);
 
   return (
     <div
@@ -127,9 +128,8 @@ export default function ImageCarousel({
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className={`w-2.5 h-2.5 rounded-full border border-white ${
-              i === index ? "bg-white" : "bg-transparent"
-            }`}
+            className={`w-2.5 h-2.5 rounded-full border border-white ${i === index ? "bg-white" : "bg-transparent"
+              }`}
             type="button"
           />)
         )}
